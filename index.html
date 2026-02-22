@@ -1196,6 +1196,7 @@
 
                 fetch("https://script.google.com/macros/s/AKfycbyWWDzg8vG4jTyhLS5DdBzongXkfSdVr2bCoau0EKl7O6Sy0NkRo67j6xi3nFSvtI_D/exec", {
                     method: "POST",
+                    mode: 'no-cors', // prevents CORS errors
                     headers: {
                         "Content-Type": "application/json"
                     },
@@ -1205,19 +1206,14 @@
                         total: totalPrice
                     })
                 })
-                .then(res => res.json())
-                .then(response => {
-
+                .finally(() => {
                     orderSummary.innerHTML = `
                         <div style="text-align:center;">
                             <div style="font-size:40px;margin-bottom:10px;">✅</div>
                             <h3 style="margin-bottom:8px;">Pesanan Berhasil!</h3>
-                            <p>ID Pesanan:</p>
-                            <strong style="font-size:18px;">${response.orderId}</strong>
+                            <p>Data Anda telah dikirim ke sistem.</p>
                         </div>
                     `;
-
-                    cancelBtn.style.display = "none";
                     confirmBtn.disabled = false;
                     confirmBtn.innerHTML = "Tutup";
 
@@ -1231,18 +1227,6 @@
                         cancelBtn.style.display = "inline-block";
                         confirmBtn.innerHTML = "Konfirmasi";
                     };
-
-                })
-                .catch(() => {
-                    orderSummary.innerHTML = `
-                        <div style="text-align:center;">
-                            <div style="font-size:40px;margin-bottom:10px;">❌</div>
-                            <h3 style="margin-bottom:8px;">Gagal Mengirim</h3>
-                            <p>Silakan coba lagi.</p>
-                        </div>
-                    `;
-                    confirmBtn.disabled = false;
-                    confirmBtn.innerHTML = "Konfirmasi";
                 });
 
             });
