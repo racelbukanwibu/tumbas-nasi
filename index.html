@@ -1109,27 +1109,39 @@
 
             /* BUILD ORDER SUMMARY */
             function buildOrderSummary() {
-                const personName = namaSelect.value;
+                const pesanan = getPesanan();
+                const days = Object.keys(pesanan);
+                const totalSelected = days.reduce((sum, day) => sum + Object.values(pesanan[day]).reduce((a,b) => a+b,0), 0);
+                const totalPrice = totalSelected * 2332;
 
-                const selectedMeals = Array.from(checkboxes)
-                    .filter(cb => cb.checked)
-                    .map(cb => ({
-                        day: cb.closest('tr').querySelector('td:first-child').textContent.trim(),
-                        time: cb.value
-                    }));
+                let summary = `<div><strong>📝 Nama:</strong> ${namaSelect.value}</div>`;
+                summary += `<div><strong>📅 Pesanan:</strong> ${totalSelected} porsi</div>`;
 
-                const totalPrice = selectedMeals.length * 2332;
+                summary += `<table style="width:100%; margin-top:10px; border-collapse: collapse;">
+                <thead>
+                    <tr style="background: rgba(255,232,193,0.2);">
+                    <th style="padding:5px; text-align:left;">Hari</th>
+                    <th style="padding:5px; text-align:center;">Isuk</th>
+                    <th style="padding:5px; text-align:center;">Awan</th>
+                    <th style="padding:5px; text-align:center;">Sore</th>
+                    </tr>
+                </thead>
+                <tbody>`;
 
-                let summary = `<div class="modal-summary-item"><strong>📝 Nama:</strong> ${personName}</div>`;
-                summary += `<div class="modal-summary-item"><strong>📅 Pesanan:</strong> ${selectedMeals.length} pesanan</div>`;
-
-                selectedMeals.forEach(meal => {
-                    summary += `<div class="modal-summary-item">• ${meal.day} - ${meal.time}</div>`;
+                days.forEach(day => {
+                    const slots = pesanan[day];
+                    summary += `<tr>
+                    <td style="padding:5px;">${day}</td>
+                    <td style="text-align:center;">${slots.Isuk ? '✅' : '-'}</td>
+                    <td style="text-align:center;">${slots.Awan ? '✅' : '-'}</td>
+                    <td style="text-align:center;">${slots.Sore ? '✅' : '-'}</td>
+                    </tr>`;
                 });
 
-                summary += `<div class="modal-summary-item" style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,232,193,0.2);">
-                    <strong>💰 Total:</strong> Rp ${totalPrice.toLocaleString('id-ID')}
-                </div> `;
+                summary += `</tbody></table>`;
+                summary += `<div style="margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,232,193,0.2);">
+                <strong>💰 Total:</strong> Rp ${totalPrice.toLocaleString('id-ID')}
+                </div>`;
 
                 return summary;
             }
