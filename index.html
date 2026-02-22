@@ -1033,273 +1033,292 @@
             <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 
             <script>
-                const form = document.getElementById('orderForm');
-                const namaSelect = document.getElementById('nama');
-                const checkboxes = document.querySelectorAll('.checkbox-item');
-                const selectionCounter = document.querySelector('.selection-counter');
-                const priceAmount = document.getElementById('priceAmount');
-                const priceBreakdown = document.getElementById('priceBreakdown');
-                const modal = document.getElementById('confirmationModal');
-                const cancelBtn = document.getElementById('cancelBtn');
-                const confirmBtn = document.getElementById('confirmBtn');
-                const submitBtn = document.getElementById('submitBtn');
-                const toast = document.getElementById('toast');
-                const orderSummary = document.getElementById('orderSummary');
+            const form = document.getElementById('orderForm');
+            const namaSelect = document.getElementById('nama');
+            const checkboxes = document.querySelectorAll('.checkbox-item');
+            const selectionCounter = document.querySelector('.selection-counter');
+            const priceAmount = document.getElementById('priceAmount');
+            const priceBreakdown = document.getElementById('priceBreakdown');
+            const modal = document.getElementById('confirmationModal');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const confirmBtn = document.getElementById('confirmBtn');
+            const submitBtn = document.getElementById('submitBtn');
+            const toast = document.getElementById('toast');
+            const orderSummary = document.getElementById('orderSummary');
 
-                let pendingSubmit = false;
-                let bypassSubmitHandler = false;
+            let pendingSubmit = false;
+            let bypassSubmitHandler = false;
 
-                /* UPDATE COUNTER + PRICE */
-                function updateCounter() {
-                    const count = document.querySelectorAll('.checkbox-item:checked').length;
-                    selectionCounter.textContent = `${count} terpilih`;
+            /* UPDATE COUNTER + PRICE */
+            function updateCounter() {
+                const count = document.querySelectorAll('.checkbox-item:checked').length;
+                selectionCounter.textContent = `${count} terpilih`;
 
-                    const totalPrice = count * 2332;
-                    priceAmount.textContent = `Rp ${totalPrice.toLocaleString('id-ID')}`;
-                    priceBreakdown.textContent = `(${count} porsi × Rp 2.332)`;
+                const totalPrice = count * 2332;
+                priceAmount.textContent = `Rp ${totalPrice.toLocaleString('id-ID')}`;
+                priceBreakdown.textContent = `(${count} porsi × Rp 2.332)`;
 
-                    return count;
+                return count;
+            }
+
+            checkboxes.forEach(cb => {
+                cb.addEventListener('change', updateCounter);
+            });
+
+            /* VALIDATION */
+            function validateForm() {
+                let isValid = true;
+
+                // Validate name
+                const nameGroup = namaSelect.closest('.form-group');
+                const nameError = nameGroup.querySelector('.validation-message.error');
+
+                if (!namaSelect.value) {
+                    nameGroup.classList.add('invalid');
+                    nameGroup.classList.remove('valid');
+                    if (nameError) nameError.classList.add('show');
+                    isValid = false;
+                } else {
+                    nameGroup.classList.remove('invalid');
+                    nameGroup.classList.add('valid');
+                    if (nameError) nameError.classList.remove('show');
                 }
 
-                checkboxes.forEach(cb => {
-                    cb.addEventListener('change', updateCounter);
-                });
+                // Validate checkboxes
+                const checkedCount = document.querySelectorAll('.checkbox-item:checked').length;
+                const firstCheckbox = document.querySelector('.checkbox-item');
 
-                /* VALIDATION */
-                function validateForm() {
-                    let isValid = true;
+                if (firstCheckbox) {
+                    const checkboxGroup = firstCheckbox.closest('.form-group');
+                    const errorMsg = checkboxGroup.querySelector('.validation-message.error');
 
-                    // Validate name
-                    const nameGroup = namaSelect.closest('.form-group');
-                    const nameError = nameGroup.querySelector('.validation-message.error');
-
-                    if (!namaSelect.value) {
-                        nameGroup.classList.add('invalid');
-                        nameGroup.classList.remove('valid');
-                        if (nameError) nameError.classList.add('show');
+                    if (checkedCount === 0) {
+                        checkboxGroup.classList.add('invalid');
+                        checkboxGroup.classList.remove('valid');
+                        if (errorMsg) errorMsg.classList.add('show');
                         isValid = false;
                     } else {
-                        nameGroup.classList.remove('invalid');
-                        nameGroup.classList.add('valid');
-                        if (nameError) nameError.classList.remove('show');
-                    }
-
-                    // Validate checkboxes
-                    const checkedCount = document.querySelectorAll('.checkbox-item:checked').length;
-                    const firstCheckbox = document.querySelector('.checkbox-item');
-
-                    if (firstCheckbox) {
-                        const checkboxGroup = firstCheckbox.closest('.form-group');
-                        const errorMsg = checkboxGroup.querySelector('.validation-message.error');
-
-                        if (checkedCount === 0) {
-                            checkboxGroup.classList.add('invalid');
-                            checkboxGroup.classList.remove('valid');
-                            if (errorMsg) errorMsg.classList.add('show');
-                            isValid = false;
-                        } else {
-                            checkboxGroup.classList.remove('invalid');
-                            checkboxGroup.classList.add('valid');
-                            if (errorMsg) errorMsg.classList.remove('show');
-                        }
-                    }
-
-                    return isValid;
-                }
-
-                /* BUILD ORDER SUMMARY */
-                function buildOrderSummary() {
-                    const personName = namaSelect.value;
-
-                    const selectedMeals = Array.from(checkboxes)
-                        .filter(cb => cb.checked)
-                        .map(cb => ({
-                            day: cb.closest('tr').querySelector('td:first-child').textContent.trim(),
-                            time: cb.value
-                        }));
-
-                    const totalPrice = selectedMeals.length * 2332;
-
-                    let summary = `<div class="modal-summary-item"><strong>📝 Nama:</strong> ${personName}</div>`;
-                    summary += `<div class="modal-summary-item"><strong>📅 Pesanan:</strong> ${selectedMeals.length} pesanan</div>`;
-
-                    selectedMeals.forEach(meal => {
-                        summary += `<div class="modal-summary-item">• ${meal.day} - ${meal.time}</div>`;
-                    });
-
-                    summary += `<div class="modal-summary-item" style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,232,193,0.2);">
-                        <strong>💰 Total:</strong> Rp ${totalPrice.toLocaleString('id-ID')}
-                    </div>`;
-
-                    return summary;
-                }
-
-                /* MODAL CONTROL */
-                function showConfirmationModal() {
-                    if (validateForm()) {
-                        orderSummary.innerHTML = buildOrderSummary();
-                        modal.classList.add('show');
-                        modal.setAttribute('aria-hidden', 'false');
-                        cancelBtn.focus();
+                        checkboxGroup.classList.remove('invalid');
+                        checkboxGroup.classList.add('valid');
+                        if (errorMsg) errorMsg.classList.remove('show');
                     }
                 }
 
-                function closeModal() {
-                    modal.classList.remove('show');
-                    modal.setAttribute('aria-hidden', 'true');
-                    submitBtn.focus();
-                }
+                return isValid;
+            }
 
-                /* FORM SUBMIT HANDLER */
-                form.addEventListener('submit', (e) => {
-                    if (bypassSubmitHandler) return true;
+            /* BUILD ORDER SUMMARY */
+            function buildOrderSummary() {
+                const personName = namaSelect.value;
 
-                    e.preventDefault();
-                    pendingSubmit = true;
-                    showConfirmationModal();
+                const selectedMeals = Array.from(checkboxes)
+                    .filter(cb => cb.checked)
+                    .map(cb => ({
+                        day: cb.closest('tr').querySelector('td:first-child').textContent.trim(),
+                        time: cb.value
+                    }));
+
+                const totalPrice = selectedMeals.length * 2332;
+
+                let summary = `<div class="modal-summary-item"><strong>📝 Nama:</strong> ${personName}</div>`;
+                summary += `<div class="modal-summary-item"><strong>📅 Pesanan:</strong> ${selectedMeals.length} pesanan</div>`;
+
+                selectedMeals.forEach(meal => {
+                    summary += `<div class="modal-summary-item">• ${meal.day} - ${meal.time}</div>`;
                 });
 
-                /* MODAL BUTTONS */
-                cancelBtn.addEventListener('click', () => {
-                    pendingSubmit = false;
+                summary += `<div class="modal-summary-item" style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,232,193,0.2);">
+                    <strong>💰 Total:</strong> Rp ${totalPrice.toLocaleString('id-ID')}
+                </div> `;
+
+                return summary;
+            }
+
+            /* GET PESANAN PER DAY/TIME */
+            function getPesanan() {
+                const pesanan = {};
+                checkboxes.forEach(cb => {
+                    if (cb.checked) {
+                        const day = cb.closest('tr').querySelector('td:first-child').textContent.trim();
+                        if (!pesanan[day]) pesanan[day] = { Isuk: 0, Awan: 0, Sore: 0 };
+                        pesanan[day][cb.value] = 1; // set value to 1 if checked
+                    }
+                });
+                return pesanan;
+            }
+
+            /* MODAL CONTROL */
+            function showConfirmationModal() {
+                if (validateForm()) {
+                    orderSummary.innerHTML = buildOrderSummary();
+                    modal.classList.add('show');
+                    modal.setAttribute('aria-hidden', 'false');
+                    cancelBtn.focus();
+                }
+            }
+
+            function closeModal() {
+                modal.classList.remove('show');
+                modal.setAttribute('aria-hidden', 'true');
+                submitBtn.focus();
+            }
+
+            /* FORM SUBMIT HANDLER */
+            form.addEventListener('submit', (e) => {
+                if (bypassSubmitHandler) return true;
+
+                e.preventDefault();
+                pendingSubmit = true;
+                showConfirmationModal();
+            });
+
+            /* MODAL BUTTONS */
+            cancelBtn.addEventListener('click', () => {
+                pendingSubmit = false;
+                closeModal();
+            });
+
+            confirmBtn.addEventListener('click', function () {
+
+                confirmBtn.disabled = true;
+                confirmBtn.innerHTML = '<span class="loading-spinner"></span>Mengirim...';
+
+                const pesanan = getPesanan();
+                const totalPrice = Object.values(pesanan).reduce((sum, day) => {
+                    return sum + Object.values(day).reduce((a,b) => a+b, 0);
+                }, 0) * 2332;
+
+                console.log("Sending data:", {
+                    nama: namaSelect.value,
+                    pesanan: pesanan,
+                    total: totalPrice
+                });
+
+                fetch("https://script.google.com/macros/s/AKfycbyWWDzg8vG4jTyhLS5DdBzongXkfSdVr2bCoau0EKl7O6Sy0NkRo67j6xi3nFSvtI_D/exec", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        nama: namaSelect.value,
+                        pesanan: pesanan,
+                        total: totalPrice
+                    })
+                })
+                .then(res => res.json())
+                .then(response => {
+
+                    orderSummary.innerHTML = `
+                        <div style="text-align:center;">
+                            <div style="font-size:40px;margin-bottom:10px;">✅</div>
+                            <h3 style="margin-bottom:8px;">Pesanan Berhasil!</h3>
+                            <p>ID Pesanan:</p>
+                            <strong style="font-size:18px;">${response.orderId}</strong>
+                        </div>
+                    `;
+
+                    cancelBtn.style.display = "none";
+                    confirmBtn.disabled = false;
+                    confirmBtn.innerHTML = "Tutup";
+
+                    confirmBtn.onclick = function () {
+                        modal.classList.remove('show');
+                        modal.setAttribute('aria-hidden', 'true');
+
+                        form.reset();
+                        updateCounter();
+
+                        cancelBtn.style.display = "inline-block";
+                        confirmBtn.innerHTML = "Konfirmasi";
+                    };
+
+                })
+                .catch(() => {
+                    orderSummary.innerHTML = `
+                        <div style="text-align:center;">
+                            <div style="font-size:40px;margin-bottom:10px;">❌</div>
+                            <h3 style="margin-bottom:8px;">Gagal Mengirim</h3>
+                            <p>Silakan coba lagi.</p>
+                        </div>
+                    `;
+                    confirmBtn.disabled = false;
+                    confirmBtn.innerHTML = "Konfirmasi";
+                });
+
+            });
+
+            /* ESC KEY CLOSE */
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('show')) {
                     closeModal();
-                });
+                }
+            });
 
-                confirmBtn.addEventListener('click', function () {
+            /* HERO CLEANUP + STARS */
+            function ensureHeroIsSection() {
+                const hero = document.querySelector('.hero');
+                if (!hero) return;
+                if (hero.tagName.toUpperCase() === 'SECTION') return;
 
-                    confirmBtn.disabled = true;
-                    confirmBtn.innerHTML = '<span class="loading-spinner"></span>Mengirim...';
+                const section = document.createElement('section');
+                section.className = hero.className;
 
-                    const formData = new FormData(form);
-
-                    fetch("https://docs.google.com/forms/d/e/1FAIpQLSdqT4M52Oq8M4vY02junlviOmxIBut85CVevT2n-44rhIhhIg/formResponse", {
-                        method: "POST",
-                        mode: "no-cors",
-                        body: formData
-                    })
-                    .then(() => {
-
-                        // Replace modal content with success message
-                        orderSummary.innerHTML = `
-                            <div style="text-align:center;">
-                                <div style="font-size:40px;margin-bottom:10px;">✅</div>
-                                <h3 style="margin-bottom:8px;">Pesanan Berhasil Dikirim!</h3>
-                                <p style="opacity:0.8;">Terima kasih. Pesanan Anda sudah kami terima.</p>
-                            </div>
-                        `;
-
-                        // Hide cancel button
-                        cancelBtn.style.display = "none";
-
-                        // Change confirm button to Close
-                        confirmBtn.disabled = false;
-                        confirmBtn.innerHTML = "Tutup";
-                        confirmBtn.onclick = function () {
-                            modal.classList.remove('show');
-                            modal.setAttribute('aria-hidden', 'true');
-
-                            // Reset everything
-                            form.reset();
-                            updateCounter();
-                            cancelBtn.style.display = "inline-block";
-                            confirmBtn.innerHTML = "Konfirmasi";
-                        };
-
-                    })
-                    .catch(() => {
-                        orderSummary.innerHTML = `
-                            <div style="text-align:center;">
-                                <div style="font-size:40px;margin-bottom:10px;">❌</div>
-                                <h3 style="margin-bottom:8px;">Gagal Mengirim</h3>
-                                <p style="opacity:0.8;">Silakan coba lagi.</p>
-                            </div>
-                        `;
-
-                        cancelBtn.style.display = "none";
-                        confirmBtn.disabled = false;
-                        confirmBtn.innerHTML = "Tutup";
-                        confirmBtn.onclick = function () {
-                            modal.classList.remove('show');
-                            modal.setAttribute('aria-hidden', 'true');
-                            cancelBtn.style.display = "inline-block";
-                            confirmBtn.innerHTML = "Konfirmasi";
-                        };
-                    });
-
-                });
-
-                /* ESC KEY CLOSE */
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape' && modal.classList.contains('show')) {
-                        closeModal();
-                    }
-                });
-
-                /* HERO CLEANUP + STARS */
-                function ensureHeroIsSection() {
-                    const hero = document.querySelector('.hero');
-                    if (!hero) return;
-                    if (hero.tagName.toUpperCase() === 'SECTION') return;
-
-                    const section = document.createElement('section');
-                    section.className = hero.className;
-
-                    for (let i = 0; i < hero.attributes.length; i++) {
-                        const attr = hero.attributes[i];
-                        if (attr.name === 'class') continue;
-                        section.setAttribute(attr.name, attr.value);
-                    }
-
-                    while (hero.firstChild) {
-                        section.appendChild(hero.firstChild);
-                    }
-
-                    hero.parentNode.replaceChild(section, hero);
+                for (let i = 0; i < hero.attributes.length; i++) {
+                    const attr = hero.attributes[i];
+                    if (attr.name === 'class') continue;
+                    section.setAttribute(attr.name, attr.value);
                 }
 
-                function removeHtmlComments() {
-                    const walker = document.createTreeWalker(document, NodeFilter.SHOW_COMMENT, null, false);
-                    const comments = [];
-                    let node = walker.nextNode();
-                    while (node) {
-                        comments.push(node);
-                        node = walker.nextNode();
-                    }
-                    comments.forEach(c => c.parentNode && c.parentNode.removeChild(c));
+                while (hero.firstChild) {
+                    section.appendChild(hero.firstChild);
                 }
 
-                function createRandomStars(count = 140) {
-                    const hero = document.querySelector('.hero');
-                    if (!hero) return;
+                hero.parentNode.replaceChild(section, hero);
+            }
 
-                    let container = hero.querySelector('.stars');
-                    if (!container) {
-                        container = document.createElement('div');
-                        container.className = 'stars';
-                        hero.appendChild(container);
-                    }
+            function removeHtmlComments() {
+                const walker = document.createTreeWalker(document, NodeFilter.SHOW_COMMENT, null, false);
+                const comments = [];
+                let node = walker.nextNode();
+                while (node) {
+                    comments.push(node);
+                    node = walker.nextNode();
+                }
+                comments.forEach(c => c.parentNode && c.parentNode.removeChild(c));
+            }
 
-                    container.innerHTML = '';
+            function createRandomStars(count = 140) {
+                const hero = document.querySelector('.hero');
+                if (!hero) return;
 
-                    for (let i = 0; i < count; i++) {
-                        const star = document.createElement('span');
-                        star.className = 'star';
-                        star.style.left = `${Math.random() * 100}%`;
-                        star.style.top = `${Math.random() * 45 + 5}%`;
-                        star.style.width = `${Math.random() * 2 + 0.8}px`;
-                        star.style.height = star.style.width;
-                        star.style.opacity = `${Math.random() * 0.7 + 0.3}`;
-                        star.style.animation = `twinkle ${Math.random() * 3 + 2}s ease-in-out ${Math.random() * 2}s infinite`;
-                        container.appendChild(star);
-                    }
+                let container = hero.querySelector('.stars');
+                if (!container) {
+                    container = document.createElement('div');
+                    container.className = 'stars';
+                    hero.appendChild(container);
                 }
 
-                document.addEventListener('DOMContentLoaded', () => {
-                    ensureHeroIsSection();
-                    removeHtmlComments();
-                    createRandomStars();
-                    updateCounter();
-                });
+                container.innerHTML = '';
+
+                for (let i = 0; i < count; i++) {
+                    const star = document.createElement('span');
+                    star.className = 'star';
+                    star.style.left = `${Math.random() * 100}%`;
+                    star.style.top = `${Math.random() * 45 + 5}%`;
+                    star.style.width = `${Math.random() * 2 + 0.8}px`;
+                    star.style.height = star.style.width;
+                    star.style.opacity = `${Math.random() * 0.7 + 0.3}`;
+                    star.style.animation = `twinkle ${Math.random() * 3 + 2}s ease-in-out ${Math.random() * 2}s infinite`;
+                    container.appendChild(star);
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                ensureHeroIsSection();
+                removeHtmlComments();
+                createRandomStars();
+                updateCounter();
+            });
             </script>
         </div>
     </section>
