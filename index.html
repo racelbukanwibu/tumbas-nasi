@@ -774,67 +774,6 @@
             display: block
         }
 
-        .weekly-summary {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 32px;
-        }
-
-        .summary-number {
-            font-size: 28px;
-            font-weight: bold;
-            margin-top: 8px;
-        }
-
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
-
-        .day-card {
-            background: #1e293b;
-            padding: 20px;
-            border-radius: 16px;
-        }
-
-        .day-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 16px;
-        }
-
-        .time-slot {
-            background: #0f172a;
-            padding: 14px;
-            border-radius: 12px;
-            margin-bottom: 14px;
-        }
-
-        .slot-header {
-            font-weight: 600;
-            margin-bottom: 8px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .name-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .name-list li {
-            font-size: 14px;
-            padding: 4px 0;
-        }
-
-        .empty {
-            opacity: 0.5;
-            font-style: italic;
-        }
-
         @media (max-width:1024px) {
             .tagline {
                 font-size: 14px
@@ -1384,64 +1323,6 @@
             });
             </script>
         </div>
-    </section>
-
-    <!-- Pesanan Section -->
-    <section class="section">
-
-    <div class="container">
-        <h2>📅 Pesanan Hari Ini</h2>
-        <div class="weekly-summary">
-            <div c >
-                <h4>Total Isuk</h4>
-                <span class="summary-number">0</span>
-            </div>
-            <div c >
-                <h4>Total Awan</h4>
-                <span class="summary-number">0</span>
-            </div>
-            <div c >
-                <h4>Total Sore</h4>
-                <span class="summary-number">0</span>
-            </div>
-        </div>
-        <div class="calendar-grid">
-        <div class="day-card">
-        <div class="day-header">
-            <h3>Senin</h3>
-            <span class="date-label">12 Feb</span>
-        </div>
-
-        <div class="time-slot isuk">
-            <div class="slot-header">
-            🌅 Isuk <span class="count">0</span>
-            </div>
-            <ul class="name-list">
-            <li class="empty">Belum ada pesanan</li>
-            </ul>
-        </div>
-
-        <div class="time-slot awan">
-            <div class="slot-header">
-            ☀️ Awan <span class="count">0</span>
-            </div>
-            <ul class="name-list">
-            <li class="empty">Belum ada pesanan</li>
-            </ul>
-        </div>
-
-        <div class="time-slot sore">
-            <div class="slot-header">
-            🌇 Sore <span class="count">0</span>
-            </div>
-            <ul class="name-list">
-            <li class="empty">Belum ada pesanan</li>
-            </ul>
-        </div>
-
-        </div>
-    </div>
-    </div>
     </section>
 </body>
 </html>
