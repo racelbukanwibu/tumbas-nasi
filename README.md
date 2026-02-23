@@ -6,12 +6,16 @@ This project was created to help my dorm improve order management, reduce daily 
 
 It is built using **HTML, CSS, and JavaScript**, integrated with **Google Forms**, **Google Sheets** and **Google Apps Script (Web App)**.
 
+---
+
 ## 🎯 Purpose
 
 - Improve dorm meal order management  
 - Reduce daily coordination confusion  
 - Provide structured weekly visualization  
 - Create a lightweight system without backend server  
+
+---
 
 ## 🛠 Tech Stack
 
@@ -22,6 +26,8 @@ It is built using **HTML, CSS, and JavaScript**, integrated with **Google Forms*
 - Google Sheets  
 - Google Apps Script (Web App)  
 
+---
+
 ## 📌 System Flow
 
 1. User submits order via Google Form  
@@ -29,6 +35,8 @@ It is built using **HTML, CSS, and JavaScript**, integrated with **Google Forms*
 3. Google Apps Script reads the sheet data  
 4. Web App endpoint returns JSON  
 5. Frontend fetches and renders data into weekly dashboard UI  
+
+---
 
 ## 📊 Dashboard Features
 
@@ -38,6 +46,8 @@ It is built using **HTML, CSS, and JavaScript**, integrated with **Google Forms*
 - 🌇 Sore (Evening) orders  
 - 📊 Weekly recap summary  
 - 📆 Monthly recap (planned)  
+
+---
 
 ## 👩‍💻 Author: @rachelliacs
 
