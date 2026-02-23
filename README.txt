@@ -1,36 +1,54 @@
-https://docs.google.com/forms/d/e/1FAIpQLSdqT4M52Oq8M4vY02junlviOmxIBut85CVevT2n-44rhIhhIg/formResponse
+# 🍱 Tumbas Nasi – Weekly Order Dashboard
 
-entry.824006088=Manda
-entry.1313414293
+Tumbas Nasi is a simple web-based ordering dashboard that collects customer orders using Google Forms and displays them in a weekly calendar layout.
 
-https://docs.google.com/forms/d/e/1FAIpQLSdqT4M52Oq8M4vY02junlviOmxIBut85CVevT2n-44rhIhhIg/formResponse
+This project was created to help my dorm improve order management, reduce daily confusion, and create a more organized meal tracking system.
 
-Nama: entry.824006088
-Senin
-entry.1313414293
-entry.1313414293
-entry.1313414293
-Selasa
-entry.1956059881
-entry.1956059881
-entry.1956059881
-Rabu
-entry.168762299
-entry.168762299
-entry.168762299
-Kamis
-entry.1593905522
-entry.1593905522
-entry.1593905522
-Jumat
-entry.288948008
-entry.288948008
-entry.288948008
-Sabtu
-entry.929366625
-entry.929366625
-entry.929366625
-Minggu
-entry.601339527
-entry.601339527
-entry.601339527
+It is built using **HTML, CSS, and JavaScript**, integrated with **Google Forms**, **Google Sheets** and **Google Apps Script (Web App)**.
+
+---
+
+## 🎯 Purpose
+
+- Improve dorm meal order management  
+- Reduce daily coordination confusion  
+- Provide structured weekly visualization  
+- Create a lightweight system without backend server  
+
+---
+
+## 🛠 Tech Stack
+
+- HTML  
+- CSS  
+- JavaScript  
+- Google Forms  
+- Google Sheets  
+- Google Apps Script (Web App)  
+
+---
+
+## 📌 System Flow
+
+1. User submits order via Google Form  
+2. Responses are stored automatically in Google Sheets  
+3. Google Apps Script reads the sheet data  
+4. Web App endpoint returns JSON  
+5. Frontend fetches and renders data into weekly dashboard UI  
+
+---
+
+## 📊 Dashboard Features
+
+- 📅 Weekly order overview  
+- 🌅 Isuk (Morning) orders  
+- ☀️ Awan (Afternoon) orders  
+- 🌇 Sore (Evening) orders  
+- 📊 Weekly recap summary  
+- 📆 Monthly recap (planned)  
+
+---
+
+## 👩‍💻 Author: @rachelliacs
+
+Mau makan? Ayo tumbas nasi! 🍱
