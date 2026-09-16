@@ -1,1328 +1,1879 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tumbas Nasi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        @keyframes twinkle {
-            0%,to {
-                opacity: .2;
-                transform: translate(-50%,-50%) scale(.9)
-            }
-
-            50% {
-                opacity: 1;
-                transform: translate(-50%,-50%) scale(1.2)
-            }
+      @keyframes twinkle {
+        0%,
+        to {
+          opacity: 0.2;
+          transform: translate(-50%, -50%) scale(0.9);
         }
 
-        @keyframes drift {
-            0%,to {
-                transform: translateX(0)
-            }
+        50% {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1.2);
+        }
+      }
 
-            50% {
-                transform: translateX(8px)
-            }
+      @keyframes drift {
+        0%,
+        to {
+          transform: translateX(0);
         }
 
-        @keyframes fadeInDown {
-            0% {
-                opacity: 0;
-                transform: translateY(-30px)
-            }
+        50% {
+          transform: translateX(8px);
+        }
+      }
 
-            to {
-                opacity: 1;
-                transform: translateY(0)
-            }
+      @keyframes fadeInDown {
+        0% {
+          opacity: 0;
+          transform: translateY(-30px);
         }
 
-        @keyframes fadeInUp {
-            0% {
-                opacity: 0;
-                transform: translateY(30px)
-            }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-            to {
-                opacity: 1;
-                transform: translateY(0)
-            }
+      @keyframes fadeInUp {
+        0% {
+          opacity: 0;
+          transform: translateY(30px);
         }
 
-        @keyframes glow {
-            0%,to {
-                box-shadow: 0 15px 35px rgba(255,232,193,.25)
-            }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-            50% {
-                box-shadow: 0 15px 50px rgba(255,232,193,.45)
-            }
+      @keyframes glow {
+        0%,
+        to {
+          box-shadow: 0 15px 35px rgba(255, 232, 193, 0.25);
         }
 
-        @keyframes fadeIn {
-            0% {
-                opacity: 0
-            }
+        50% {
+          box-shadow: 0 15px 50px rgba(255, 232, 193, 0.45);
+        }
+      }
 
-            to {
-                opacity: 1
-            }
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
         }
 
-        @keyframes slideUp {
-            0% {
-                opacity: 0;
-                transform: translateY(30px)
-            }
+        to {
+          opacity: 1;
+        }
+      }
 
-            to {
-                opacity: 1;
-                transform: translateY(0)
-            }
+      @keyframes slideUp {
+        0% {
+          opacity: 0;
+          transform: translateY(30px);
         }
 
-        @keyframes slideInRight {
-            0% {
-                opacity: 0;
-                transform: translateX(50px)
-            }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-            to {
-                opacity: 1;
-                transform: translateX(0)
-            }
+      @keyframes slideInRight {
+        0% {
+          opacity: 0;
+          transform: translateX(50px);
         }
 
-        *,body {
-            margin: 0;
-            padding: 0
+        to {
+          opacity: 1;
+          transform: translateX(0);
         }
+      }
 
-        * {
-            box-sizing: border-box
-        }
+      *,
+      body {
+        margin: 0;
+        padding: 0;
+      }
 
-        h1,h2,h3,h4,h5,h6 {
-            margin: 0 0 24px
-        }
+      * {
+        box-sizing: border-box;
+      }
 
-        p {
-            margin: 0 0 8px
-        }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin: 0 0 24px;
+      }
 
-        html {
-            scroll-behavior: smooth
-        }
+      p {
+        margin: 0 0 8px;
+      }
 
-        body {
-            font-family: "Space Grotesk","Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI","Roboto",sans-serif;
-            background: linear-gradient(to top,#30cfd0 0,#330867 100%);
-            min-height: 100vh;
-            letter-spacing: .3px;
-            overflow-x: hidden
-        }
+      html {
+        scroll-behavior: smooth;
+      }
 
-        section {
-            max-width: 100vw;
-            overflow: hidden;
-            padding: 56px 0
-        }
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-family:
+          "Space Grotesk",
+          "Poppins",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          "Roboto",
+          sans-serif;
+        background: linear-gradient(to top, #30cfd0 0, #330867 100%);
+        min-height: 100vh;
+        letter-spacing: 0.3px;
+        overflow-x: hidden;
+      }
 
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 80px;
-            image-rendering: pixelated
-        }
+      section {
+        max-width: 100vw;
+        overflow: hidden;
+        padding: 56px 0;
+      }
 
-        .hero {
-            position: relative;
-            padding: 60px 48px;
-            box-shadow: none;
-            text-align: center;
-            margin-bottom: 0;
-            animation: fadeInDown .6s ease-out;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center
-        }
+      .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 80px;
+        image-rendering: pixelated;
+      }
 
-        .hero .tagline,.hero h1 {
-            font-family: "Press Start 2P",cursive
-        }
+      .hero {
+        position: relative;
+        padding: 60px 48px;
+        box-shadow: none;
+        text-align: center;
+        margin-bottom: 0;
+        animation: fadeInDown 0.6s ease-out;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
 
-        .hero>.container {
-            z-index: 3
-        }
+      .hero .tagline,
+      .hero h1 {
+        font-family: "Press Start 2P", cursive;
+      }
 
-        .hero .stars {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 2;
-            overflow: visible
-        }
+      .hero > .container {
+        z-index: 3;
+      }
 
-        .hero .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: #fff;
-            border-radius: 50%;
-            opacity: .9;
-            box-shadow: 0 0 6px rgba(255,255,255,.8);
-            transform: translate(-50%,-50%)
-        }
+      .hero .stars {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 2;
+        overflow: visible;
+      }
 
-        .hero .address-pointer {
-            position: absolute;
-            bottom: 14%;
-            right: 16%;
-            z-index: 4;
-            background: rgba(0,0,0,.7);
-            color: orange;
-            padding: 8px 14px;
-            border-radius: 4px;
-            font-size: 13px;
-            font-weight: 600;
-            white-space: nowrap;
-            font-family: "Space Grotesk",sans-serif;
-            letter-spacing: .3px;
-            box-shadow: 0 4px 16px rgba(0,0,0,.5);
-            border: 1px solid orange
-        }
+      .hero .star {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: #fff;
+        border-radius: 50%;
+        opacity: 0.9;
+        box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+        transform: translate(-50%, -50%);
+      }
 
-        .hero .address-pointer::after {
-            content: "";
-            position: absolute;
-            bottom: -9px;
-            right: 20%;
-            width: 0;
-            height: 0;
-            border-left: 6px solid transparent;
-            border-right: 6px solid transparent;
-            border-top: 8px solid rgba(0,0,0,.7);
-            z-index: 5
-        }
+      .hero .address-pointer {
+        position: absolute;
+        bottom: 14%;
+        right: 16%;
+        z-index: 4;
+        background: rgba(0, 0, 0, 0.7);
+        color: orange;
+        padding: 8px 14px;
+        border-radius: 4px;
+        font-size: 13px;
+        font-weight: 600;
+        white-space: nowrap;
+        font-family: "Space Grotesk", sans-serif;
+        letter-spacing: 0.3px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+        border: 1px solid orange;
+      }
 
-        .hero .stars {
-            animation: drift 8s ease-in-out infinite
-        }
+      .hero .address-pointer::after {
+        content: "";
+        position: absolute;
+        bottom: -9px;
+        right: 20%;
+        width: 0;
+        height: 0;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 8px solid rgba(0, 0, 0, 0.7);
+        z-index: 5;
+      }
 
-        .cta-button::before,.hero::after {
-            content: "";
-            position: absolute;
-            width: 100%
-        }
+      .week-info-banner {
+        background: rgba(0, 0, 0, 0.6);
+        color: orange;
+        border: 2px solid orange;
+        padding: 12px 18px;
+        margin-bottom: 24px;
+        font-size: 14px;
+        line-height: 1.6;
+        text-align: center;
+      }
 
-        .hero::after {
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            min-width: 1024px;
-            overflow-x: auto;
-            height: 22%;
-            pointer-events: none;
-            z-index: 1;
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'>%3Crect width='1200' height='120' fill='transparent'/%3E%3C%21-- bars: 40 buildings, width=30 each --%3E%3Crect x='0' y='90' width='30' height='30' fill='%23000'/%3E%3Crect x='30' y='70' width='30' height='50' fill='%23000'/%3E%3Crect x='60' y='100' width='30' height='20' fill='%23000'/%3E%3Crect x='90' y='60' width='30' height='60' fill='%23000'/%3E%3Crect x='120' y='80' width='30' height='40' fill='%23000'/%3E%3Crect x='150' y='50' width='30' height='70' fill='%23000'/%3E%3Crect x='180' y='65' width='30' height='55' fill='%23000'/%3E%3Crect x='210' y='85' width='30' height='35' fill='%23000'/%3E%3Crect x='240' y='95' width='30' height='25' fill='%23000'/%3E%3Crect x='270' y='55' width='30' height='65' fill='%23000'/%3E%3Crect x='300' y='75' width='30' height='45' fill='%23000'/%3E%3Crect x='330' y='60' width='30' height='60' fill='%23000'/%3E%3Crect x='360' y='90' width='30' height='30' fill='%23000'/%3E%3Crect x='390' y='72' width='30' height='48' fill='%23000'/%3E%3Crect x='420' y='48' width='30' height='72' fill='%23000'/%3E%3Crect x='450' y='88' width='30' height='32' fill='%23000'/%3E%3Crect x='480' y='100' width='30' height='20' fill='%23000'/%3E%3Crect x='510' y='64' width='30' height='56' fill='%23000'/%3E%3Crect x='540' y='86' width='30' height='34' fill='%23000'/%3E%3Crect x='570' y='70' width='30' height='50' fill='%23000'/%3E%3Crect x='600' y='92' width='30' height='28' fill='%23000'/%3E%3Crect x='630' y='58' width='30' height='62' fill='%23000'/%3E%3Crect x='660' y='76' width='30' height='44' fill='%23000'/%3E%3Crect x='690' y='102' width='30' height='18' fill='%23000'/%3E%3Crect x='720' y='68' width='30' height='52' fill='%23000'/%3E%3Crect x='750' y='80' width='30' height='40' fill='%23000'/%3E%3Crect x='780' y='54' width='30' height='66' fill='%23000'/%3E%3Crect x='810' y='94' width='30' height='26' fill='%23000'/%3E%3Crect x='840' y='72' width='30' height='48' fill='%23000'/%3E%3Crect x='870' y='62' width='30' height='58' fill='%23000'/%3E%3Crect x='900' y='88' width='30' height='32' fill='%23000'/%3E%3Crect x='930' y='96' width='30' height='24' fill='%23000'/%3E%3Crect x='960' y='70' width='30' height='50' fill='%23000'/%3E%3Crect x='990' y='64' width='30' height='56' fill='%23000'/%3E%3Crect x='1020' y='82' width='30' height='38' fill='%23000'/%3E%3Crect x='1050' y='58' width='30' height='62' fill='%23000'/%3E%3Crect x='1080' y='96' width='30' height='24' fill='%23000'/%3E%3Crect x='1110' y='74' width='30' height='46' fill='%23000'/%3E%3Crect x='1140' y='50' width='30' height='70' fill='%23000'/%3E%3Crect x='1170' y='86' width='30' height='34' fill='%23000'/%3E%3C%21-- some diagonal roofs --%3E%3Cpolygon points='150,50 180,44 180,120' fill='%23000'/%3E%3Cpolygon points='300,75 330,68 330,120' fill='%23000'/%3E%3Cpolygon points='420,48 450,40 450,120' fill='%23000'/%3E%3Cpolygon points='570,70 600,64 600,120' fill='%23000'/%3E%3Cpolygon points='750,80 780,72 780,120' fill='%23000'/%3E%3Cpolygon points='930,96 960,90 960,120' fill='%23000'/%3E%3C/svg>")
-        }
+      .hero .stars {
+        animation: drift 8s ease-in-out infinite;
+      }
 
-        .tagline,h1 {
-            text-shadow: none
-        }
+      .cta-button::before,
+      .hero::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+      }
 
+      .hero::after {
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        min-width: 1024px;
+        overflow-x: auto;
+        height: 22%;
+        pointer-events: none;
+        z-index: 1;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'>%3Crect width='1200' height='120' fill='transparent'/%3E%3C%21-- bars: 40 buildings, width=30 each --%3E%3Crect x='0' y='90' width='30' height='30' fill='%23000'/%3E%3Crect x='30' y='70' width='30' height='50' fill='%23000'/%3E%3Crect x='60' y='100' width='30' height='20' fill='%23000'/%3E%3Crect x='90' y='60' width='30' height='60' fill='%23000'/%3E%3Crect x='120' y='80' width='30' height='40' fill='%23000'/%3E%3Crect x='150' y='50' width='30' height='70' fill='%23000'/%3E%3Crect x='180' y='65' width='30' height='55' fill='%23000'/%3E%3Crect x='210' y='85' width='30' height='35' fill='%23000'/%3E%3Crect x='240' y='95' width='30' height='25' fill='%23000'/%3E%3Crect x='270' y='55' width='30' height='65' fill='%23000'/%3E%3Crect x='300' y='75' width='30' height='45' fill='%23000'/%3E%3Crect x='330' y='60' width='30' height='60' fill='%23000'/%3E%3Crect x='360' y='90' width='30' height='30' fill='%23000'/%3E%3Crect x='390' y='72' width='30' height='48' fill='%23000'/%3E%3Crect x='420' y='48' width='30' height='72' fill='%23000'/%3E%3Crect x='450' y='88' width='30' height='32' fill='%23000'/%3E%3Crect x='480' y='100' width='30' height='20' fill='%23000'/%3E%3Crect x='510' y='64' width='30' height='56' fill='%23000'/%3E%3Crect x='540' y='86' width='30' height='34' fill='%23000'/%3E%3Crect x='570' y='70' width='30' height='50' fill='%23000'/%3E%3Crect x='600' y='92' width='30' height='28' fill='%23000'/%3E%3Crect x='630' y='58' width='30' height='62' fill='%23000'/%3E%3Crect x='660' y='76' width='30' height='44' fill='%23000'/%3E%3Crect x='690' y='102' width='30' height='18' fill='%23000'/%3E%3Crect x='720' y='68' width='30' height='52' fill='%23000'/%3E%3Crect x='750' y='80' width='30' height='40' fill='%23000'/%3E%3Crect x='780' y='54' width='30' height='66' fill='%23000'/%3E%3Crect x='810' y='94' width='30' height='26' fill='%23000'/%3E%3Crect x='840' y='72' width='30' height='48' fill='%23000'/%3E%3Crect x='870' y='62' width='30' height='58' fill='%23000'/%3E%3Crect x='900' y='88' width='30' height='32' fill='%23000'/%3E%3Crect x='930' y='96' width='30' height='24' fill='%23000'/%3E%3Crect x='960' y='70' width='30' height='50' fill='%23000'/%3E%3Crect x='990' y='64' width='30' height='56' fill='%23000'/%3E%3Crect x='1020' y='82' width='30' height='38' fill='%23000'/%3E%3Crect x='1050' y='58' width='30' height='62' fill='%23000'/%3E%3Crect x='1080' y='96' width='30' height='24' fill='%23000'/%3E%3Crect x='1110' y='74' width='30' height='46' fill='%23000'/%3E%3Crect x='1140' y='50' width='30' height='70' fill='%23000'/%3E%3Crect x='1170' y='86' width='30' height='34' fill='%23000'/%3E%3C%21-- some diagonal roofs --%3E%3Cpolygon points='150,50 180,44 180,120' fill='%23000'/%3E%3Cpolygon points='300,75 330,68 330,120' fill='%23000'/%3E%3Cpolygon points='420,48 450,40 450,120' fill='%23000'/%3E%3Cpolygon points='570,70 600,64 600,120' fill='%23000'/%3E%3Cpolygon points='750,80 780,72 780,120' fill='%23000'/%3E%3Cpolygon points='930,96 960,90 960,120' fill='%23000'/%3E%3C/svg>");
+      }
+
+      .tagline,
+      h1 {
+        text-shadow: none;
+      }
+
+      h1 {
+        font-size: 48px;
+        font-weight: 700;
+        margin-bottom: 16px;
+        line-height: 1.2;
+        letter-spacing: 0;
+      }
+
+      h1,
+      h2 {
+        color: #fff;
+      }
+
+      .tagline {
+        font-size: 18px;
+        color: #ff69b4;
+        margin-bottom: 48px;
+        font-weight: 400;
+        letter-spacing: 0.5px;
+        line-height: 1.3;
+        opacity: 0.95;
+      }
+
+      .cta-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background: linear-gradient(135deg, #78c850 0, orange 100%);
+        color: #2d4a04;
+        padding: 16px 44px;
+        border: 3px solid #2d4a04;
+        border-radius: 0;
+        font-size: 16px;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 12px 32px rgba(191, 175, 165, 0.3);
+        letter-spacing: 0.4px;
+        font-family: "Space Grotesk", sans-serif;
+        position: relative;
+        overflow: hidden;
+        image-rendering: pixelated;
+      }
+
+      .cta-button::before {
+        top: 0;
+        left: -100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        transition: left 0.6s ease;
+      }
+
+      .cta-button:hover::before {
+        left: 100%;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 18px 45px rgba(255, 255, 255, 0.4);
+      }
+
+      .cta-button:focus {
+        outline: 2px solid orange;
+        outline-offset: 2px;
+      }
+
+      .info,
+      .report {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+      }
+
+      .card {
+        background: linear-gradient(135deg, #ffe680 0, #ffb347 100%);
+        padding: 40px 35px;
+        border: 4px solid #2d4a04;
+        text-align: center;
+        transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        image-rendering: pixelated;
+        clip-path: polygon(
+          20px 0,
+          100%0,
+          100% 20px,
+          100% 100%,
+          80px 100%,
+          0 100%,
+          0 80px,
+          0 0
+        );
+      }
+
+      .cta::before,
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+      }
+
+      .card::before {
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.5),
+          transparent
+        );
+      }
+
+      .cta h2,
+      .card h3 {
+        font-size: 22px;
+        margin-bottom: 16px;
+        color: #2d4a04;
+        font-weight: 600;
+        letter-spacing: -0.4px;
+      }
+
+      .card p {
+        color: #505060;
+        font-size: 14px;
+        line-height: 1.8;
+        font-weight: 400;
+        letter-spacing: 0.2px;
+      }
+
+      .card-icon {
+        font-size: 56px;
+        margin-bottom: 24px;
+        display: inline-block;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+      }
+
+      .report .card h3,
+      .report .card-icon {
+        margin-bottom: 0px;
+      }
+
+      .cta {
+        text-align: center;
+        padding: 60px 50px;
+        background: linear-gradient(135deg, #fdc830 0, #f37335 100%);
+        border-radius: 0;
+        border: 4px solid #2d4a04;
+        animation: fadeInUp 0.6s ease-out 0.7s both;
+        position: relative;
+        overflow: hidden;
+        image-rendering: pixelated;
+      }
+
+      .cta::before {
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.7),
+          transparent
+        );
+      }
+
+      .cta h2 {
+        font-size: 36px;
+        color: #fff;
+        font-weight: 700;
+        letter-spacing: -0.6px;
+      }
+
+      .cta p {
+        color: #fff;
+        margin-bottom: 36px;
+        font-size: 16px;
+        line-height: 1.7;
+        letter-spacing: 0.2px;
+      }
+
+      @media (max-width: 768px) {
         h1 {
-            font-size: 48px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            line-height: 1.2;
-            letter-spacing: 0
-        }
-
-        h1,h2 {
-            color: #fff
+          font-size: 36px;
         }
 
         .tagline {
-            font-size: 18px;
-            color: #ff69b4;
-            margin-bottom: 48px;
-            font-weight: 400;
-            letter-spacing: .5px;
-            line-height: 1.3;
-            opacity: .95
+          font-size: 18px;
+        }
+
+        .cta,
+        .menu-section {
+          padding: 25px;
+        }
+
+        .card h3 {
+          font-size: 24px;
         }
 
         .cta-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: linear-gradient(135deg,#78c850 0,orange 100%);
-            color: #2d4a04;
-            padding: 16px 44px;
-            border: 3px solid #2d4a04;
-            border-radius: 0;
-            font-size: 16px;
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all .35s cubic-bezier(.4,0,.2,1);
-            box-shadow: 0 12px 32px rgba(191,175,165,.3);
-            letter-spacing: .4px;
-            font-family: "Space Grotesk",sans-serif;
-            position: relative;
-            overflow: hidden;
-            image-rendering: pixelated
+          padding: 14px 32px;
+          font-size: 16px;
+        }
+      }
+
+      .card:focus,
+      .menu-item:focus,
+      .testimonial:focus {
+        outline: 2px solid orange;
+        outline-offset: 4px;
+      }
+
+      :focus-visible {
+        outline: 2px solid orange;
+        outline-offset: 2px;
+      }
+
+      #submitBtn,
+      .order {
+        image-rendering: pixelated;
+      }
+
+      .order {
+        background: linear-gradient(135deg, #ffe680 0, #ffb347 100%);
+        padding: 40px 35px;
+        border: 4px solid #2d4a04;
+        position: relative;
+        overflow: hidden;
+        clip-path: polygon(
+          20px 0,
+          100%0,
+          100% 20px,
+          100% 100%,
+          80px 100%,
+          0 100%,
+          0 80px,
+          0 0
+        );
+      }
+
+      .order::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.5),
+          transparent
+        );
+      }
+
+      .order form {
+        position: relative;
+        z-index: 2;
+      }
+
+      #submitBtn {
+        background: linear-gradient(135deg, #78c850 0, orange 100%);
+        color: #2d4a04;
+        padding: 14px 40px;
+        border: 3px solid #2d4a04;
+        border-radius: 0;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: "Space Grotesk", "Poppins", sans-serif;
+        letter-spacing: 0.4px;
+        transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        display: block;
+        margin: 20px auto 0;
+      }
+
+      #submitBtn:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 28px rgba(120, 200, 80, 0.3);
+      }
+
+      #submitBtn:focus {
+        outline: 2px solid #2d4a04;
+        outline-offset: 2px;
+      }
+
+      .form-footer {
+        margin-top: 24px;
+        text-align: center;
+      }
+
+      .form-footer p {
+        color: #2d4a04;
+        font-size: 13px;
+        margin-bottom: 12px !important;
+      }
+
+      .whatsapp-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #078a45;
+        color: #fff;
+        padding: 10px 20px;
+        border: 2px solid #2d4a04;
+        border-radius: 0;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        font-family: "Space Grotesk", "Poppins", sans-serif;
+        letter-spacing: 0.3px;
+        transition: all 0.3s ease;
+        image-rendering: pixelated;
+      }
+
+      .whatsapp-cta:hover {
+        background: #065f39;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(7, 138, 69, 0.3);
+      }
+
+      .whatsapp-cta:focus {
+        outline: 2px solid #078a45;
+        outline-offset: 2px;
+      }
+
+      .validation-message {
+        display: none;
+        font-size: 12px;
+        margin-bottom: 6px;
+        font-weight: 600;
+        letter-spacing: 0.2px;
+      }
+
+      .validation-message.error {
+        color: #c94c4c;
+        display: block;
+      }
+
+      .validation-message.show {
+        display: block;
+      }
+
+      .selection-counter {
+        font-weight: 500;
+        opacity: 0.85;
+      }
+
+      .form-group {
+        margin-bottom: 30px;
+      }
+
+      .form-group-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+      }
+
+      label,
+      select {
+        font-size: 15px;
+        color: #2d4a04;
+        font-family: "Space Grotesk", "Poppins", sans-serif;
+      }
+
+      label {
+        display: block;
+        font-weight: 600;
+        letter-spacing: 0.4px;
+        text-transform: uppercase;
+        opacity: 0.95;
+      }
+
+      .form-group select {
+        appearance: none;
+        position: relative;
+      }
+
+      .form-group::after select {
+        content: "▾";
+        position: absolute;
+        right: 16px;
+        transform: translateY(50%) translateY(4px);
+        pointer-events: none;
+        color: #2d4a04;
+      }
+
+      select {
+        width: 100%;
+        padding: 12px 16px;
+        border: 3px solid #2d4a04;
+        border-radius: 0;
+        background-color: rgba(255, 255, 255, 0.9);
+        transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        letter-spacing: 0.3px;
+        image-rendering: pixelated;
+      }
+
+      select:hover {
+        border-color: #78c850;
+        background-color: #fff;
+        box-shadow: 0 4px 12px rgba(45, 74, 4, 0.15);
+      }
+
+      select:focus {
+        outline: 0;
+        border-color: orange;
+        box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.12);
+        background-color: #fff;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        overflow: hidden;
+        border-radius: 0;
+      }
+
+      td,
+      th {
+        padding: 10px 8px;
+        border: 2px solid #2d4a04;
+      }
+
+      th {
+        background: #78c850;
+        color: #fff;
+      }
+
+      .price-label,
+      th span {
+        font-size: 12px;
+      }
+
+      td {
+        background: rgba(255, 255, 255, 0.5);
+      }
+
+      td:has(input) {
+        text-align: center;
+        vertical-align: middle;
+      }
+
+      .price-label {
+        color: #2d4a04;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        margin-bottom: 12px;
+        opacity: 0.9;
+      }
+
+      .price-amount {
+        color: orange;
+        font-size: 48px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        font-family: "Space Grotesk", "Poppins", sans-serif;
+      }
+
+      .price-breakdown {
+        color: #2d4a04;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.2px;
+        opacity: 0.85;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        animation: fadeIn 0.3s ease-out;
+      }
+
+      .modal.show {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal-content {
+        background: linear-gradient(135deg, #1a1a2e 0, #252540 100%);
+        padding: 40px;
+        border-radius: 0;
+        border: 4px solid #2d4a04;
+        max-width: 500px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        animation: slideUp 0.3s ease-out;
+      }
+
+      .modal-header {
+        font-size: 24px;
+        font-weight: 700;
+        color: orange;
+        margin-bottom: 15px;
+      }
+
+      .modal-body {
+        color: #e0e0e0;
+        margin-bottom: 25px;
+        line-height: 1.6;
+      }
+
+      .modal-summary {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 15px;
+        border-radius: 0;
+        border: 2px solid orange;
+        margin-bottom: 20px;
+        font-size: 14px;
+        max-height: 200px;
+        overflow-y: auto;
+      }
+
+      .modal-summary-item {
+        padding: 5px 0;
+        color: orange;
+      }
+
+      .modal-actions {
+        display: flex;
+        gap: 12px;
+        justify-content: flex-end;
+      }
+
+      .modal-btn {
+        padding: 12px 24px;
+        border: 0;
+        border-radius: 0;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-family: "Space Grotesk", "Poppins", sans-serif;
+        font-size: 14px;
+      }
+
+      .modal-btn-cancel {
+        background: rgba(255, 255, 255, 0.2);
+        color: #e0e0e0;
+      }
+
+      .modal-btn-cancel:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .modal-btn-confirm {
+        background: linear-gradient(135deg, #78c850 0, orange 100%);
+        color: #2d4a04;
+      }
+
+      .modal-btn-confirm:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(255, 232, 193, 0.3);
+      }
+
+      .toast {
+        display: none;
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: rgba(0, 0, 0, 0.8);
+        color: orange;
+        padding: 16px 24px;
+        border-radius: 0;
+        border: 2px solid #2d4a04;
+        font-size: 14px;
+        font-weight: 600;
+        z-index: 2000;
+        animation: slideInRight 0.4s ease-out;
+      }
+
+      .toast.show {
+        display: block;
+      }
+
+      @media (max-width: 1024px) {
+        .tagline {
+          font-size: 14px;
         }
 
-        .cta-button::before {
-            top: 0;
-            left: -100%;
-            height: 100%;
-            background: linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);
-            transition: left .6s ease
-        }
-
-        .cta-button:hover::before {
-            left: 100%
-        }
-
-        .cta-button:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 18px 45px rgba(255,255,255,.4)
-        }
-
-        .cta-button:focus {
-            outline: 2px solid orange;
-            outline-offset: 2px
-        }
-
-        .info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-            gap: 30px
-        }
-
-        .card {
-            background: linear-gradient(135deg,#ffe680 0,#ffb347 100%);
-            padding: 40px 35px;
-            border: 4px solid #2d4a04;
-            text-align: center;
-            transition: all .35s cubic-bezier(.4,0,.2,1);
-            position: relative;
-            overflow: hidden;
-            image-rendering: pixelated;
-            clip-path: polygon(20px 0,100%0,100% 20px,100% 100%,80px 100%,0 100%,0 80px,0 0)
-        }
-
-        .cta::before,.card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px
-        }
-
-        .card::before {
-            background: linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent)
-        }
-
-        .cta h2,.card h3 {
-            font-size: 22px;
-            margin-bottom: 16px;
-            color: #2d4a04;
-            font-weight: 600;
-            letter-spacing: -.4px
-        }
-
-        .card p {
-            color: #505060;
-            font-size: 14px;
-            line-height: 1.8;
-            font-weight: 400;
-            letter-spacing: .2px
-        }
-
-        .info-icon {
-            font-size: 56px;
-            margin-bottom: 24px;
-            display: inline-block;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,.1))
+        .price-amount,
+        h1 {
+          font-size: 36px;
         }
 
         .cta {
-            text-align: center;
-            padding: 60px 50px;
-            background: linear-gradient(135deg,#fdc830 0,#f37335 100%);
-            border-radius: 0;
-            border: 4px solid #2d4a04;
-            animation: fadeInUp .6s ease-out .7s both;
-            position: relative;
-            overflow: hidden;
-            image-rendering: pixelated
+          padding: 45px 36px;
         }
 
-        .cta::before {
-            background: linear-gradient(90deg,transparent,rgba(255,255,255,.7),transparent)
+        .card {
+          padding: 30px;
         }
 
-        .cta h2 {
-            font-size: 36px;
-            color: #fff;
-            font-weight: 700;
-            letter-spacing: -.6px
+        .container {
+          padding: 0 40px;
         }
 
-        .cta p {
-            color: #fff;
-            margin-bottom: 36px;
-            font-size: 16px;
-            line-height: 1.7;
-            letter-spacing: .2px
-        }
-
-        @media (max-width:768px) {
-            h1 {
-                font-size: 36px
-            }
-
-            .tagline {
-                font-size: 18px
-            }
-
-            .cta,.menu-section {
-                padding: 25px
-            }
-
-            .card h3 {
-                font-size: 24px
-            }
-
-            .cta-button {
-                padding: 14px 32px;
-                font-size: 16px
-            }
-        }
-
-        .card:focus,.menu-item:focus,.testimonial:focus {
-            outline: 2px solid orange;
-            outline-offset: 4px
-        }
-
-        :focus-visible {
-            outline: 2px solid orange;
-            outline-offset: 2px
-        }
-
-        #submitBtn,.order {
-            image-rendering: pixelated
-        }
-
-        .order {
-            background: linear-gradient(135deg,#ffe680 0,#ffb347 100%);
-            padding: 40px 35px;
-            border: 4px solid #2d4a04;
-            position: relative;
-            overflow: hidden;
-            clip-path: polygon(20px 0,100%0,100% 20px,100% 100%,80px 100%,0 100%,0 80px,0 0)
-        }
-
-        .order::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent)
-        }
-
-        .order form {
-            position: relative;
-            z-index: 2
-        }
-
-        #submitBtn {
-            background: linear-gradient(135deg,#78c850 0,orange 100%);
-            color: #2d4a04;
-            padding: 14px 40px;
-            border: 3px solid #2d4a04;
-            border-radius: 0;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            font-family: "Space Grotesk","Poppins",sans-serif;
-            letter-spacing: .4px;
-            transition: all .35s cubic-bezier(.4,0,.2,1);
-            display: block;
-            margin: 20px auto 0
-        }
-
-        #submitBtn:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 28px rgba(120,200,80,.3)
-        }
-
-        #submitBtn:focus {
-            outline: 2px solid #2d4a04;
-            outline-offset: 2px
-        }
-
-        .form-footer {
-            margin-top: 24px;
-            text-align: center
-        }
-
-        .form-footer p {
-            color: #2d4a04;
-            font-size: 13px;
-            margin-bottom: 12px!important
-        }
-
-        .whatsapp-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #078a45;
-            color: #fff;
-            padding: 10px 20px;
-            border: 2px solid #2d4a04;
-            border-radius: 0;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-            font-family: "Space Grotesk","Poppins",sans-serif;
-            letter-spacing: .3px;
-            transition: all .3s ease;
-            image-rendering: pixelated
-        }
-
-        .whatsapp-cta:hover {
-            background: #065f39;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(7,138,69,.3)
-        }
-
-        .whatsapp-cta:focus {
-            outline: 2px solid #078a45;
-            outline-offset: 2px
-        }
-
-        .validation-message {
-            display: none;
-            font-size: 12px;
-            margin-bottom: 6px;
-            font-weight: 600;
-            letter-spacing: .2px
-        }
-
-        .validation-message.error {
-            color: #c94c4c;
-            display: block
-        }
-
-        .validation-message.show {
-            display: block
-        }
-
-        .selection-counter {
-            font-weight: 500;
-            opacity: .85
-        }
-
-        .form-group {
-            margin-bottom: 30px
-        }
-
-        .form-group-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 12px
-        }
-
-        label,select {
-            font-size: 15px;
-            color: #2d4a04;
-            font-family: "Space Grotesk","Poppins",sans-serif
-        }
-
-        label {
-            display: block;
-            font-weight: 600;
-            letter-spacing: .4px;
-            text-transform: uppercase;
-            opacity: .95
-        }
-
-        .form-group select {
-            appearance: none;
-            position: relative
-        }
-
-        .form-group::after select {
-            content: "▾";
-            position: absolute;
-            right: 16px;
-            transform: translateY(50%) translateY(4px);
-            pointer-events: none;
-            color: #2d4a04
-        }
-
-        select {
-            width: 100%;
-            padding: 12px 16px;
-            border: 3px solid #2d4a04;
-            border-radius: 0;
-            background-color: rgba(255,255,255,.9);
-            transition: all .35s cubic-bezier(.4,0,.2,1);
-            cursor: pointer;
-            letter-spacing: .3px;
-            image-rendering: pixelated
-        }
-
-        select:hover {
-            border-color: #78c850;
-            background-color: #fff;
-            box-shadow: 0 4px 12px rgba(45,74,4,.15)
-        }
-
-        select:focus {
-            outline: 0;
-            border-color: orange;
-            box-shadow: 0 0 0 3px rgba(255,165,0,.12);
-            background-color: #fff
-        }
-
-        table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            overflow: hidden;
-            border-radius: 0
-        }
-
-        td,th {
-            padding: 10px 8px;
-            border: 2px solid #2d4a04
-        }
-
-        th {
-            background: #78c850;
-            color: #fff
-        }
-
-        .price-label,th span {
-            font-size: 12px
-        }
-
-        td {
-            background: rgba(255,255,255,.5)
-        }
-
-        td:has(input) {
-            text-align: center;
-            vertical-align: middle;
-        }
-
-        .price-label {
-            color: #2d4a04;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-            margin-bottom: 12px;
-            opacity: .9
-        }
-
-        .price-amount {
-            color: orange;
-            font-size: 48px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            font-family: "Space Grotesk","Poppins",sans-serif
-        }
-
-        .price-breakdown {
-            color: #2d4a04;
-            font-size: 13px;
-            font-weight: 500;
-            letter-spacing: .2px;
-            opacity: .85
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,.6);
-            animation: fadeIn .3s ease-out
-        }
-
-        .modal.show {
-            display: flex;
-            align-items: center;
-            justify-content: center
+        .hero {
+          padding: 80px 30px;
         }
 
         .modal-content {
-            background: linear-gradient(135deg,#1a1a2e 0,#252540 100%);
-            padding: 40px;
-            border-radius: 0;
-            border: 4px solid #2d4a04;
-            max-width: 500px;
-            box-shadow: 0 20px 60px rgba(0,0,0,.4);
-            animation: slideUp .3s ease-out
+          width: 480px;
+          padding: 30px;
         }
 
-        .modal-header {
-            font-size: 24px;
-            font-weight: 700;
-            color: orange;
-            margin-bottom: 15px
+        #submitBtn,
+        .cta-button {
+          padding: 14px 36px;
+          font-size: 14px;
         }
 
-        .modal-body {
-            color: #e0e0e0;
-            margin-bottom: 25px;
-            line-height: 1.6
+        #submitBtn {
+          padding: 12px 32px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 28px;
         }
 
-        .modal-summary {
-            background: rgba(255,255,255,.1);
-            padding: 15px;
-            border-radius: 0;
-            border: 2px solid orange;
-            margin-bottom: 20px;
-            font-size: 14px;
-            max-height: 200px;
-            overflow-y: auto
+        .tagline {
+          font-size: 13px;
         }
 
-        .modal-summary-item {
-            padding: 5px 0;
-            color: orange
+        .price-amount {
+          font-size: 30px;
+        }
+
+        .cta {
+          padding: 32px 20px;
+        }
+
+        .card {
+          padding: 24px;
+          clip-path: none;
+        }
+
+        .container {
+          padding: 0 20px;
+        }
+
+        .hero {
+          padding: 90px 20px 70px;
+        }
+
+        #submitBtn,
+        .cta-button {
+          padding: 14px;
+          font-size: 14px;
+        }
+
+        .modal-content {
+          width: 90%;
+          padding: 24px;
         }
 
         .modal-actions {
-            display: flex;
-            gap: 12px;
-            justify-content: flex-end
+          flex-direction: column;
+          gap: 10px;
         }
 
         .modal-btn {
-            padding: 12px 24px;
-            border: 0;
-            border-radius: 0;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all .3s ease;
-            font-family: "Space Grotesk","Poppins",sans-serif;
-            font-size: 14px
-        }
-
-        .modal-btn-cancel {
-            background: rgba(255,255,255,.2);
-            color: #e0e0e0
-        }
-
-        .modal-btn-cancel:hover {
-            background: rgba(255,255,255,.3)
-        }
-
-        .modal-btn-confirm {
-            background: linear-gradient(135deg,#78c850 0,orange 100%);
-            color: #2d4a04
-        }
-
-        .modal-btn-confirm:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(255,232,193,.3)
+          width: 100%;
         }
 
         .toast {
-            display: none;
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: rgba(0,0,0,.8);
-            color: orange;
-            padding: 16px 24px;
-            border-radius: 0;
-            border: 2px solid #2d4a04;
-            font-size: 14px;
-            font-weight: 600;
-            z-index: 2000;
-            animation: slideInRight .4s ease-out
+          right: 16px;
+          left: 16px;
+          bottom: 20px;
+          text-align: center;
         }
 
-        .toast.show {
-            display: block
+        .hero .address-pointer {
+          padding: 4px 8px;
+          font-size: 8px;
         }
+      }
+      .divider {
+        height: 2px;
+        background: #2d4a04;
+        margin: 12px 0;
+        opacity: 0.4;
+      }
 
-        @media (max-width:1024px) {
-            .tagline {
-                font-size: 14px
-            }
+      .name-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 14px;
+      }
 
-            .price-amount,h1 {
-                font-size: 36px
-            }
+      .name-list li {
+        padding: 4px 0;
+        border-bottom: 1px dashed rgba(45, 74, 4, 0.3);
+      }
 
-            .cta {
-                padding: 45px 36px
-            }
+      .site-footer {
+        text-align: center;
+        padding: 24px 20px;
+        background: rgba(0, 0, 0, 0.4);
+        border-top: 3px solid #2d4a04;
+        image-rendering: pixelated;
+      }
 
-            .card {
-                padding: 30px
-            }
+      .site-footer p {
+        margin: 0;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.7);
+        letter-spacing: 0.3px;
+      }
 
-            .container {
-                padding: 0 40px
-            }
+      .footer-credit {
+        color: orange;
+        font-weight: 600;
+      }
 
-            .hero {
-                padding: 80px 30px
-            }
-
-            .modal-content {
-                width: 480px;
-                padding: 30px
-            }
-
-            #submitBtn,.cta-button {
-                padding: 14px 36px;
-                font-size: 14px
-            }
-
-            #submitBtn {
-                padding: 12px 32px
-            }
-        }
-
-        @media (max-width:768px) {
-            h1 {
-                font-size: 28px
-            }
-
-            .tagline {
-                font-size: 13px
-            }
-
-            .price-amount {
-                font-size: 30px
-            }
-
-            .cta {
-                padding: 32px 20px
-            }
-
-            .card {
-                padding: 24px;
-                clip-path: none
-            }
-
-            .container {
-                padding: 0 20px
-            }
-
-            .hero {
-                padding: 90px 20px 70px;
-            }
-
-            #submitBtn,.cta-button {
-                padding: 14px;
-                font-size: 14px
-            }
-
-            .modal-content {
-                width: 90%;
-                padding: 24px
-            }
-
-            .modal-actions {
-                flex-direction: column;
-                gap: 10px
-            }
-
-            .modal-btn {
-                width: 100%
-            }
-
-            .toast {
-                right: 16px;
-                left: 16px;
-                bottom: 20px;
-                text-align: center
-            }
-
-            .hero .address-pointer {
-                padding: 4px 8px;
-                font-size: 8px;
-            }
-        }
+      .footer-credit a {
+        text-decoration: none;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Hero Section -->
     <section class="section hero">
-        <div class="container">
-            <h1>Tumbas Nasi</h1>
-            <div class="tagline">Mau makan? <br> Ayo tumbas nasi!</div>
-            <a href="#order" class="cta-button" aria-label="Pesan nasi sekarang">
-                Pesan Sekarang
-            </a>
-            <div class="address-pointer">📍 Mulyosasi Mas C 10</div>
+      <div class="container">
+        <h1>Tumbas Nasi</h1>
+        <div class="tagline">
+          Mau makan? <br />
+          Ayo tumbas nasi!
         </div>
+        <a href="#order" class="cta-button" aria-label="Pesan nasi sekarang">
+          Pesan Sekarang
+        </a>
+        <div class="address-pointer">📍 Mulyosasi Mas C 10</div>
+      </div>
     </section>
 
     <!-- Info Section -->
     <section class="section">
-        <div class="container">
-            <h2>⭐ Informasi Layanan</h2>
-            <div class="info" aria-label="Service information">
-                <div class="card" tabindex="0">
-                    <div class="info-icon">⏰</div>
-                    <h3>Jam Operasional</h3>
-                    <p>
-                        <strong>Isuk:</strong> 06:00 | <strong>Awan:</strong> 14:00 | <strong>Sore:</strong> 18:00
-                    </p>
-                </div>
-                <div class="card" tabindex="0">
-                    <div class="info-icon">💰</div>
-                    <h3>Harga Terbaru</h3>
-                    <p>
-                        <strong>Rp 2.332</strong> per porsi (200g)<br>
-                        Beras putih organik Cap Abah Tani, harga <strong>Rp 58.300</strong> per 5kg.<br>
-                    </p>
-                </div>
-            </div>
+      <div class="container">
+        <h2>⭐ Informasi Layanan</h2>
+        <div class="info" aria-label="Service information">
+          <div class="card" tabindex="0">
+            <div class="card-icon">⏰</div>
+            <h3>Jam Operasional</h3>
+            <p>
+              <strong>🌅 Isuk:</strong> 06:00 | <strong>☀️ Awan:</strong> 14:00
+              | <strong>🌇 Sore:</strong> 18:00
+            </p>
+          </div>
+          <div class="card" tabindex="0">
+            <div class="card-icon">💰</div>
+            <h3>Harga Terbaru</h3>
+            <p>
+              <strong>Rp 2.332</strong> per porsi (200g)<br />
+              Beras putih organik Cap Abah Tani, harga
+              <strong>Rp 58.300</strong> per 5kg.<br />
+            </p>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Order Form Section -->
     <section class="section" id="order">
-        <div class="container">
-             <h2>⭐ Formulir Pemesanan</h2>
-            <div class="order" aria-label="Order rice form">
-                <form id="orderForm" method="POST">
-                    <div class="form-group is-select">
-                        <div class="form-group-header">
-                            <label for="nama">👤 Nama sing Tumbas</label>
-                        </div>
-                        <div class="validation-message error" role="alert">Silakan pilih nama</div>
-                        <select id="nama" name="entry.824006088" aria-label="Select person name" aria-required="true" required>
-                            <option value="">Pilih Nama</option>
-                            <option value="Ella">Ella</option>
-                            <option value="Firda">Firda</option>
-                            <option value="Fitriyanti">Fitriyanti</option>
-                            <option value="Lusi">Lusi</option>
-                            <option value="Nabila">Nabila</option>
-                            <option value="Naila">Naila</option>
-                            <option value="Nayla">Nayla</option>
-                            <option value="Nisa">Nisa</option>
-                            <option value="Manda">Manda</option>
-                            <option value="Mia">Mia</option>
-                            <option value="Muthi">Muthi</option>
-                            <option value="Tirta">Tirta</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <div class="form-group-header">
-                            <label>📅 Berapa lek Tumbas <span class="selection-counter">0 terpilih</span></label>
-                        </div>
-                        <div class="validation-message error" role="alert">Silakan pilih minimal satu waktu</div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Isuk<br><span>06:00</span></th>
-                                    <th>Awan<br><span>14:00</span></th>
-                                    <th>Sore<br><span>18:00</span></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Senin</td>
-                                    <td><input type="checkbox" name="entry.1313414293" value="Isuk" aria-label="Monday morning" class="checkbox-item"></td>
-                                    <td><input type="checkbox" name="entry.1313414293" value="Awan" aria-label="Monday noon" class="checkbox-item"></td>
-                                    <td><input type="checkbox" name="entry.1313414293" value="Sore" aria-label="Monday evening" class="checkbox-item"></td>
-                                </tr>
-                                <tr>
-                                    <td>Selasa</td>
-                                    <td><input type="checkbox" name="entry.1956059881" value="Isuk" aria-label="Tuesday morning" class="checkbox-item"></td>
-                                    <td><input type="checkbox" name="entry.1956059881" value="Awan" aria-label="Tuesday noon" class="checkbox-item"></td>
-                                    <td><input type="checkbox" name="entry.1956059881" value="Sore" aria-label="Tuesday evening" class="checkbox-item"></td>
-                                </tr>
-                                <tr>
-                                    <td>Rabu</td>
-                                    <td><input type="checkbox" name="entry.168762299" value="Isuk" aria-label="Wednesday morning" class="checkbox-item"></td>
-                                    <td><input type="checkbox" name="entry.168762299" value="Awan" aria-label="Wednesday noon" class="checkbox-item"></td>
-                                    <td><input type="checkbox" name="entry.168762299" value="Sore" aria-label="Wednesday evening" class="checkbox-item"></td>
-                                </tr>
-                                <tr>
-                                    <td>Kamis</td>
-                                    <td><input type="checkbox" name="entry.1593905522" value="Isuk" aria-label="Thursday morning" class="checkbox-item"></td>
-                                    <td><input type="checkbox" name="entry.1593905522" value="Awan" aria-label="Thursday noon" class="checkbox-item"></td>
-                                    <td><input type="checkbox" name="entry.1593905522" value="Sore" aria-label="Thursday evening" class="checkbox-item"></td>
-                                </tr>
-                                <tr>
-                                    <td>Jumat</td>
-                                    <td><input type="checkbox" name="entry.288948008" value="Isuk" aria-label="Friday morning" class="checkbox-item"></td>
-                                    <td><input type="checkbox" name="entry.288948008" value="Awan" aria-label="Friday noon" class="checkbox-item"></td>
-                                    <td><input type="checkbox" name="entry.288948008" value="Sore" aria-label="Friday evening" class="checkbox-item"></td>
-                                </tr>
-                                <tr>
-                                    <td>Sabtu</td>
-                                    <td><input type="checkbox" name="entry.929366625" value="Isuk" aria-label="Saturday morning" class="checkbox-item"></td>
-                                    <td><input type="checkbox" name="entry.929366625" value="Awan" aria-label="Saturday noon" class="checkbox-item"></td>
-                                    <td><input type="checkbox" name="entry.929366625" value="Sore" aria-label="Saturday evening" class="checkbox-item"></td>
-                                </tr>
-                                <tr>
-                                    <td>Minggu</td>
-                                    <td><input type="checkbox" name="entry.601339527" value="Isuk" aria-label="Sunday morning" class="checkbox-item"></td>
-                                    <td><input type="checkbox" name="entry.601339527" value="Awan" aria-label="Sunday noon" class="checkbox-item"></td>
-                                    <td><input type="checkbox" name="entry.601339527" value="Sore" aria-label="Sunday evening" class="checkbox-item"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- Price Display -->
-                    <div class="price-display">
-                        <div class="price-label">Total</div>
-                        <div class="price-amount" id="priceAmount">Rp 0</div>
-                        <div class="price-breakdown" id="priceBreakdown">(0 item × Rp 2.332)</div>
-                    </div>
-
-                    <button type="submit" id="submitBtn" aria-label="Kirim pesanan">Kirim Pesanan</button>
-                </form>
-            </div>
-
-            <div class="form-footer">
-                <p style="color: white; font-size: 13px; font-weight: 700;">Mau membatalkan pesanan?</p>
-                <a href="https://wa.me/6289519044474?text=Halo%2C%20saya%20ingin%20membatalkan%20pesanan%20nasi" class="whatsapp-cta" target="_blank" aria-label="Hubungi via WhatsApp untuk membatalkan">
-                    <span>💬</span>
-                    <span>Chat lewat WhatsApp</span>
-                </a>
-            </div>
-
-            <!-- Confirmation Modal -->
-            <div id="confirmationModal" class="modal" role="dialog" aria-labelledby="modalHeader" aria-hidden="true">
-                <div class="modal-content">
-                    <div class="modal-header" id="modalHeader">Ringkasan Pesanan Anda</div>
-                    <div class="modal-body">
-                        <div class="modal-summary" id="orderSummary"></div>
-                    </div>
-                    <div class="modal-actions">
-                        <button type="button" id="cancelBtn" class="modal-btn modal-btn-cancel" aria-label="Batal konfirmasi pesanan">Batal</button>
-                        <button type="button" id="confirmBtn" class="modal-btn modal-btn-confirm" aria-label="Konfirmasi dan kirim pesanan">Konfirmasi</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Toast Notification -->
-            <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
-
-            <script>
-            const form = document.getElementById('orderForm');
-            const namaSelect = document.getElementById('nama');
-            const checkboxes = document.querySelectorAll('.checkbox-item');
-            const selectionCounter = document.querySelector('.selection-counter');
-            const priceAmount = document.getElementById('priceAmount');
-            const priceBreakdown = document.getElementById('priceBreakdown');
-            const modal = document.getElementById('confirmationModal');
-            const cancelBtn = document.getElementById('cancelBtn');
-            const confirmBtn = document.getElementById('confirmBtn');
-            const submitBtn = document.getElementById('submitBtn');
-            const toast = document.getElementById('toast');
-            const orderSummary = document.getElementById('orderSummary');
-
-            let pendingSubmit = false;
-            let bypassSubmitHandler = false;
-
-            /* UPDATE COUNTER + PRICE */
-            function updateCounter() {
-                const count = document.querySelectorAll('.checkbox-item:checked').length;
-                selectionCounter.textContent = `${count} terpilih`;
-
-                const totalPrice = count * 2332;
-                priceAmount.textContent = `Rp ${totalPrice.toLocaleString('id-ID')}`;
-                priceBreakdown.textContent = `(${count} porsi × Rp 2.332)`;
-
-                return count;
-            }
-
-            checkboxes.forEach(cb => {
-                cb.addEventListener('change', updateCounter);
-            });
-
-            /* VALIDATION */
-            function validateForm() {
-                let isValid = true;
-
-                // Validate name
-                const nameGroup = namaSelect.closest('.form-group');
-                const nameError = nameGroup.querySelector('.validation-message.error');
-
-                if (!namaSelect.value) {
-                    nameGroup.classList.add('invalid');
-                    nameGroup.classList.remove('valid');
-                    if (nameError) nameError.classList.add('show');
-                    isValid = false;
-                } else {
-                    nameGroup.classList.remove('invalid');
-                    nameGroup.classList.add('valid');
-                    if (nameError) nameError.classList.remove('show');
-                }
-
-                // Validate checkboxes
-                const checkedCount = document.querySelectorAll('.checkbox-item:checked').length;
-                const firstCheckbox = document.querySelector('.checkbox-item');
-
-                if (firstCheckbox) {
-                    const checkboxGroup = firstCheckbox.closest('.form-group');
-                    const errorMsg = checkboxGroup.querySelector('.validation-message.error');
-
-                    if (checkedCount === 0) {
-                        checkboxGroup.classList.add('invalid');
-                        checkboxGroup.classList.remove('valid');
-                        if (errorMsg) errorMsg.classList.add('show');
-                        isValid = false;
-                    } else {
-                        checkboxGroup.classList.remove('invalid');
-                        checkboxGroup.classList.add('valid');
-                        if (errorMsg) errorMsg.classList.remove('show');
-                    }
-                }
-
-                return isValid;
-            }
-
-            /* BUILD ORDER SUMMARY */
-            function buildOrderSummary() {
-                const pesanan = getPesanan();
-                const days = Object.keys(pesanan);
-                const totalSelected = days.reduce((sum, day) => sum + Object.values(pesanan[day]).reduce((a,b) => a+b,0), 0);
-                const totalPrice = totalSelected * 2332;
-
-                let summary = `<div><strong>📝 Nama:</strong> ${namaSelect.value}</div>`;
-                summary += `<div><strong>📅 Pesanan:</strong> ${totalSelected} porsi</div>`;
-
-                summary += `<table style="width:100%; margin-top:10px; border-collapse: collapse;">
-                <thead>
-                    <tr style="background: rgba(255,232,193,0.2);">
-                    <th style="padding:5px; text-align:left;">Hari</th>
-                    <th style="padding:5px; text-align:center;">Isuk</th>
-                    <th style="padding:5px; text-align:center;">Awan</th>
-                    <th style="padding:5px; text-align:center;">Sore</th>
-                    </tr>
-                </thead>
-                <tbody>`;
-
-                days.forEach(day => {
-                    const slots = pesanan[day];
-                    summary += `<tr>
-                    <td style="padding:5px;">${day}</td>
-                    <td style="text-align:center;">${slots.Isuk ? '✅' : '-'}</td>
-                    <td style="text-align:center;">${slots.Awan ? '✅' : '-'}</td>
-                    <td style="text-align:center;">${slots.Sore ? '✅' : '-'}</td>
-                    </tr>`;
-                });
-
-                summary += `</tbody></table>`;
-                summary += `<div style="margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,232,193,0.2);">
-                <strong>💰 Total:</strong> Rp ${totalPrice.toLocaleString('id-ID')}
-                </div>`;
-
-                return summary;
-            }
-
-            /* GET PESANAN PER DAY/TIME */
-            function getPesanan() {
-                const pesanan = {};
-                checkboxes.forEach(cb => {
-                    if (cb.checked) {
-                        const day = cb.closest('tr').querySelector('td:first-child').textContent.trim();
-                        if (!pesanan[day]) pesanan[day] = { Isuk: 0, Awan: 0, Sore: 0 };
-                        pesanan[day][cb.value] = 1; // set value to 1 if checked
-                    }
-                });
-                return pesanan;
-            }
-
-            /* MODAL CONTROL */
-            function showConfirmationModal() {
-                if (validateForm()) {
-                    orderSummary.innerHTML = buildOrderSummary();
-                    modal.classList.add('show');
-                    modal.setAttribute('aria-hidden', 'false');
-                    cancelBtn.focus();
-                }
-            }
-
-            function closeModal() {
-                modal.classList.remove('show');
-                modal.setAttribute('aria-hidden', 'true');
-                submitBtn.focus();
-            }
-
-            /* FORM SUBMIT HANDLER */
-            form.addEventListener('submit', (e) => {
-                if (bypassSubmitHandler) return true;
-
-                e.preventDefault();
-                pendingSubmit = true;
-                showConfirmationModal();
-            });
-
-            /* MODAL BUTTONS */
-            cancelBtn.addEventListener('click', () => {
-                pendingSubmit = false;
-                closeModal();
-            });
-
-            confirmBtn.addEventListener('click', function () {
-
-                confirmBtn.disabled = true;
-                confirmBtn.innerHTML = '<span class="loading-spinner"></span>Mengirim...';
-
-                const pesanan = getPesanan();
-                const totalPrice = Object.values(pesanan).reduce((sum, day) => {
-                    return sum + Object.values(day).reduce((a,b) => a+b, 0);
-                }, 0) * 2332;
-
-                console.log("Sending data:", {
-                    nama: namaSelect.value,
-                    pesanan: pesanan,
-                    total: totalPrice
-                });
-
-                fetch("https://script.google.com/macros/s/AKfycbyWWDzg8vG4jTyhLS5DdBzongXkfSdVr2bCoau0EKl7O6Sy0NkRo67j6xi3nFSvtI_D/exec", {
-                    method: "POST",
-                    mode: 'no-cors', // prevents CORS errors
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        nama: namaSelect.value,
-                        pesanan: pesanan,
-                        total: totalPrice
-                    })
-                })
-                .finally(() => {
-                    orderSummary.innerHTML = `
-                        <div style="text-align:center;">
-                            <div style="font-size:40px;margin-bottom:10px;">✅</div>
-                            <h3 style="margin-bottom:8px;">Pesanan Berhasil!</h3>
-                            <p>Data Anda telah dikirim ke sistem.</p>
-                        </div>
-                    `;
-                    confirmBtn.disabled = false;
-                    confirmBtn.innerHTML = "Tutup";
-
-                    confirmBtn.onclick = function () {
-                        modal.classList.remove('show');
-                        modal.setAttribute('aria-hidden', 'true');
-
-                        form.reset();
-                        updateCounter();
-
-                        cancelBtn.style.display = "inline-block";
-                        confirmBtn.innerHTML = "Konfirmasi";
-                    };
-                });
-
-            });
-
-            /* ESC KEY CLOSE */
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && modal.classList.contains('show')) {
-                    closeModal();
-                }
-            });
-
-            /* HERO CLEANUP + STARS */
-            function ensureHeroIsSection() {
-                const hero = document.querySelector('.hero');
-                if (!hero) return;
-                if (hero.tagName.toUpperCase() === 'SECTION') return;
-
-                const section = document.createElement('section');
-                section.className = hero.className;
-
-                for (let i = 0; i < hero.attributes.length; i++) {
-                    const attr = hero.attributes[i];
-                    if (attr.name === 'class') continue;
-                    section.setAttribute(attr.name, attr.value);
-                }
-
-                while (hero.firstChild) {
-                    section.appendChild(hero.firstChild);
-                }
-
-                hero.parentNode.replaceChild(section, hero);
-            }
-
-            function removeHtmlComments() {
-                const walker = document.createTreeWalker(document, NodeFilter.SHOW_COMMENT, null, false);
-                const comments = [];
-                let node = walker.nextNode();
-                while (node) {
-                    comments.push(node);
-                    node = walker.nextNode();
-                }
-                comments.forEach(c => c.parentNode && c.parentNode.removeChild(c));
-            }
-
-            function createRandomStars(count = 140) {
-                const hero = document.querySelector('.hero');
-                if (!hero) return;
-
-                let container = hero.querySelector('.stars');
-                if (!container) {
-                    container = document.createElement('div');
-                    container.className = 'stars';
-                    hero.appendChild(container);
-                }
-
-                container.innerHTML = '';
-
-                for (let i = 0; i < count; i++) {
-                    const star = document.createElement('span');
-                    star.className = 'star';
-                    star.style.left = `${Math.random() * 100}%`;
-                    star.style.top = `${Math.random() * 45 + 5}%`;
-                    star.style.width = `${Math.random() * 2 + 0.8}px`;
-                    star.style.height = star.style.width;
-                    star.style.opacity = `${Math.random() * 0.7 + 0.3}`;
-                    star.style.animation = `twinkle ${Math.random() * 3 + 2}s ease-in-out ${Math.random() * 2}s infinite`;
-                    container.appendChild(star);
-                }
-            }
-
-            document.addEventListener('DOMContentLoaded', () => {
-                ensureHeroIsSection();
-                removeHtmlComments();
-                createRandomStars();
-                updateCounter();
-            });
-            </script>
+      <div class="container">
+        <h2>⭐ Formulir Pemesanan</h2>
+        <div class="week-info-banner">
+          💡INFO PENTING <br />
+          📅 Pesanan yang di kirim adalah pesanan untuk minggu ini:
+          <strong id="week-range">-</strong><br />
+          Waktu ideal isi form adalah <strong>Hari Minggu</strong>,
+          <strong id="ideal-sunday-date">-</strong> (untuk rencana seminggu ke
+          depan) <br />
+          Jadwal ideal isi form berikutnya:
+          <strong id="next-ideal-date">-</strong> (akhir minggu selanjutnya)
+          <br />
+          tetapi tidak masalah bila ada pesanan dadakan di hari ini, infokan
+          kepada admin via WhatsApp.
         </div>
+        <div class="order" aria-label="Order rice form">
+          <form id="orderForm" method="POST">
+            <div class="form-group">
+              <div class="form-group-header">
+                <label for="Nama">👤 Nama sing Tumbas</label>
+              </div>
+              <div class="validation-message error" role="alert">
+                Silakan pilih nama
+              </div>
+              <select
+                id="Nama"
+                aria-label="Select person name"
+                aria-required="true"
+                required
+              >
+                <option value="">Pilih Nama</option>
+                <option value="Ella">Ella</option>
+                <option value="Firda">Firda</option>
+                <option value="Fitriyanti">Fitriyanti</option>
+                <option value="Lusi">Lusi</option>
+                <option value="Nabila">Nabila</option>
+                <option value="Naila">Naila</option>
+                <option value="Nayla">Nayla</option>
+                <option value="Nisa">Nisa</option>
+                <option value="Manda">Manda</option>
+                <option value="Mia">Mia</option>
+                <option value="Muthi">Muthi</option>
+                <option value="Tirta">Tirta</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <div class="form-group-header">
+                <label
+                  >📅 Berapa lek Tumbas
+                  <span class="selection-counter">0 terpilih</span></label
+                >
+              </div>
+              <div class="validation-message error" role="alert">
+                Silakan pilih minimal satu waktu
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Isuk<br /><span>06:00</span></th>
+                    <th>Awan<br /><span>14:00</span></th>
+                    <th>Sore<br /><span>18:00</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Senin</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        value="Isuk"
+                        aria-label="Monday morning"
+                        class="checkbox-item"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        value="Awan"
+                        aria-label="Monday noon"
+                        class="checkbox-item"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        value="Sore"
+                        aria-label="Monday evening"
+                        class="checkbox-item"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Selasa</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        value="Isuk"
+                        aria-label="Tuesday morning"
+                        class="checkbox-item"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        value="Awan"
+                        aria-label="Tuesday noon"
+                        class="checkbox-item"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        value="Sore"
+                        aria-label="Tuesday evening"
+                        class="checkbox-item"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Rabu</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        value="Isuk"
+                        aria-label="Wednesday morning"
+                        class="checkbox-item"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        value="Awan"
+                        aria-label="Wednesday noon"
+                        class="checkbox-item"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        value="Sore"
+                        aria-label="Wednesday evening"
+                        class="checkbox-item"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Kamis</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        value="Isuk"
+                        aria-label="Thursday morning"
+                        class="checkbox-item"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        value="Awan"
+                        aria-label="Thursday noon"
+                        class="checkbox-item"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        value="Sore"
+                        aria-label="Thursday evening"
+                        class="checkbox-item"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Jumat</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        value="Isuk"
+                        aria-label="Friday morning"
+                        class="checkbox-item"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        value="Awan"
+                        aria-label="Friday noon"
+                        class="checkbox-item"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        value="Sore"
+                        aria-label="Friday evening"
+                        class="checkbox-item"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Sabtu</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        value="Isuk"
+                        aria-label="Saturday morning"
+                        class="checkbox-item"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        value="Awan"
+                        aria-label="Saturday noon"
+                        class="checkbox-item"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        value="Sore"
+                        aria-label="Saturday evening"
+                        class="checkbox-item"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Minggu</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        value="Isuk"
+                        aria-label="Sunday morning"
+                        class="checkbox-item"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        value="Awan"
+                        aria-label="Sunday noon"
+                        class="checkbox-item"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        value="Sore"
+                        aria-label="Sunday evening"
+                        class="checkbox-item"
+                      />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Price Display -->
+            <div class="price-display">
+              <div class="price-label">Total</div>
+              <div class="price-amount" id="priceAmount">Rp 0</div>
+              <div class="price-breakdown" id="priceBreakdown">
+                (0 item × Rp 2.332)
+              </div>
+            </div>
+
+            <button type="submit" id="submitBtn" aria-label="Kirim pesanan">
+              Kirim Pesanan
+            </button>
+          </form>
+        </div>
+
+        <!-- Confirmation Modal -->
+        <div
+          id="confirmationModal"
+          class="modal"
+          role="dialog"
+          aria-labelledby="modalHeader"
+          aria-hidden="true"
+        >
+          <div class="modal-content">
+            <div class="modal-header" id="modalHeader">
+              Ringkasan Pesanan Anda
+            </div>
+            <div class="modal-body">
+              <div class="modal-summary" id="orderSummary"></div>
+            </div>
+            <div class="modal-actions">
+              <button
+                type="button"
+                id="cancelBtn"
+                class="modal-btn modal-btn-cancel"
+                aria-label="Batal konfirmasi pesanan"
+              >
+                Batal
+              </button>
+              <button
+                type="button"
+                id="confirmBtn"
+                class="modal-btn modal-btn-confirm"
+                aria-label="Konfirmasi dan kirim pesanan"
+              >
+                Konfirmasi
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Toast Notification -->
+        <div
+          id="toast"
+          class="toast"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+        ></div>
+
+        <script>
+          const form = document.getElementById("orderForm");
+          const namaSelect = document.getElementById("Nama");
+          const checkboxes = document.querySelectorAll(".checkbox-item");
+          const selectionCounter = document.querySelector(".selection-counter");
+          const priceAmount = document.getElementById("priceAmount");
+          const priceBreakdown = document.getElementById("priceBreakdown");
+          const modal = document.getElementById("confirmationModal");
+          const cancelBtn = document.getElementById("cancelBtn");
+          const confirmBtn = document.getElementById("confirmBtn");
+          const submitBtn = document.getElementById("submitBtn");
+          const toast = document.getElementById("toast");
+          const orderSummary = document.getElementById("orderSummary");
+
+          let pendingSubmit = false;
+          let bypassSubmitHandler = false;
+
+          /* UPDATE COUNTER + PRICE */
+          function updateCounter() {
+            const count = document.querySelectorAll(
+              ".checkbox-item:checked",
+            ).length;
+            selectionCounter.textContent = `${count} terpilih`;
+
+            const totalPrice = count * 2332;
+            priceAmount.textContent = `Rp ${totalPrice.toLocaleString("id-ID")}`;
+            priceBreakdown.textContent = `(${count} porsi × Rp 2.332)`;
+
+            return count;
+          }
+
+          function updateWeekRange() {
+            const now = new Date();
+            const jakartaTime = new Date(
+              now.toLocaleString("en-US", { timeZone: "Asia/Jakarta" }),
+            );
+
+            const day = jakartaTime.getDay(); // 0=Minggu, 1=Senin, ...
+            const diffToMonday = day === 0 ? -6 : 1 - day;
+
+            const monday = new Date(jakartaTime);
+            monday.setDate(jakartaTime.getDate() + diffToMonday);
+
+            const sunday = new Date(monday);
+            sunday.setDate(monday.getDate() + 6);
+
+            // Minggu kemarin (sehari sebelum Senin minggu ini) = waktu ideal submit untuk minggu ini
+            const idealSunday = new Date(monday);
+            idealSunday.setDate(monday.getDate() - 1);
+
+            // Akhir minggu selanjutnya (Minggu, penutup minggu depan) = deadline ideal submit berikutnya
+            const nextIdealSunday = sunday;
+
+            const months = [
+              "Jan",
+              "Feb",
+              "Mar",
+              "Apr",
+              "Mei",
+              "Jun",
+              "Jul",
+              "Agu",
+              "Sep",
+              "Okt",
+              "Nov",
+              "Des",
+            ];
+            const format = (d) =>
+              `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+            const formatShort = (d) => `${d.getDate()} ${months[d.getMonth()]}`;
+
+            document.getElementById("week-range").textContent =
+              `${formatShort(monday)} - ${formatShort(sunday)} ${sunday.getFullYear()}`;
+
+            document.getElementById("ideal-sunday-date").textContent =
+              format(idealSunday);
+            document.getElementById("next-ideal-date").textContent =
+              format(nextIdealSunday);
+          }
+
+          checkboxes.forEach((cb) => {
+            cb.addEventListener("change", updateCounter);
+          });
+
+          /* VALIDATION */
+          function validateForm() {
+            let isValid = true;
+
+            // Validate name
+            const nameGroup = namaSelect.closest(".form-group");
+            const nameError = nameGroup.querySelector(
+              ".validation-message.error",
+            );
+
+            if (!namaSelect.value) {
+              nameGroup.classList.add("invalid");
+              nameGroup.classList.remove("valid");
+              if (nameError) nameError.classList.add("show");
+              isValid = false;
+            } else {
+              nameGroup.classList.remove("invalid");
+              nameGroup.classList.add("valid");
+              if (nameError) nameError.classList.remove("show");
+            }
+
+            // Validate checkboxes
+            const checkedCount = document.querySelectorAll(
+              ".checkbox-item:checked",
+            ).length;
+            const firstCheckbox = document.querySelector(".checkbox-item");
+
+            if (firstCheckbox) {
+              const checkboxGroup = firstCheckbox.closest(".form-group");
+              const errorMsg = checkboxGroup.querySelector(
+                ".validation-message.error",
+              );
+
+              if (checkedCount === 0) {
+                checkboxGroup.classList.add("invalid");
+                checkboxGroup.classList.remove("valid");
+                if (errorMsg) errorMsg.classList.add("show");
+                isValid = false;
+              } else {
+                checkboxGroup.classList.remove("invalid");
+                checkboxGroup.classList.add("valid");
+                if (errorMsg) errorMsg.classList.remove("show");
+              }
+            }
+
+            return isValid;
+          }
+
+          /* BUILD ORDER SUMMARY */
+          function buildOrderSummary() {
+            const pesanan = getPesanan();
+            const days = Object.keys(pesanan);
+            const totalSelected = days.reduce(
+              (sum, day) =>
+                sum + Object.values(pesanan[day]).reduce((a, b) => a + b, 0),
+              0,
+            );
+            const totalPrice = totalSelected * 2332;
+
+            let summary = `<div><strong>📝 Nama:</strong> ${namaSelect.value}</div>`;
+            summary += `<div><strong>📅 Pesanan:</strong> ${totalSelected} porsi</div>`;
+
+            summary += `<table style="width:100%; margin-top:10px; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: rgba(255,232,193,0.2);">
+                        <th style="padding:5px; text-align:left;">Hari</th>
+                        <th style="padding:5px; text-align:center;">Isuk</th>
+                        <th style="padding:5px; text-align:center;">Awan</th>
+                        <th style="padding:5px; text-align:center;">Sore</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+
+            days.forEach((day) => {
+              const slots = pesanan[day];
+              summary += `<tr>
+                        <td style="padding:5px;">${day}</td>
+                        <td style="text-align:center;">${slots.Isuk ? "✅" : "-"}</td>
+                        <td style="text-align:center;">${slots.Awan ? "✅" : "-"}</td>
+                        <td style="text-align:center;">${slots.Sore ? "✅" : "-"}</td>
+                        </tr>`;
+            });
+
+            summary += `</tbody></table>`;
+            summary += `<div style="margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,232,193,0.2);">
+                    <strong>💰 Total:</strong> Rp ${totalPrice.toLocaleString("id-ID")}
+                    </div>`;
+
+            return summary;
+          }
+
+          /* GET PESANAN PER DAY/TIME */
+          function getPesanan() {
+            const pesanan = {};
+            checkboxes.forEach((cb) => {
+              if (cb.checked) {
+                const day = cb
+                  .closest("tr")
+                  .querySelector("td:first-child")
+                  .textContent.trim();
+                if (!pesanan[day]) pesanan[day] = { Isuk: 0, Awan: 0, Sore: 0 };
+                pesanan[day][cb.value] = 1; // set value to 1 if checked
+              }
+            });
+            return pesanan;
+          }
+
+          /* MODAL CONTROL */
+          function showConfirmationModal() {
+            if (validateForm()) {
+              orderSummary.innerHTML = buildOrderSummary();
+              modal.classList.add("show");
+              modal.setAttribute("aria-hidden", "false");
+              cancelBtn.focus();
+            }
+          }
+
+          function closeModal() {
+            modal.classList.remove("show");
+            modal.setAttribute("aria-hidden", "true");
+            submitBtn.focus();
+          }
+
+          /* FORM SUBMIT HANDLER */
+          form.addEventListener("submit", (e) => {
+            if (bypassSubmitHandler) return true;
+
+            e.preventDefault();
+            pendingSubmit = true;
+            showConfirmationModal();
+          });
+
+          /* MODAL BUTTONS */
+          cancelBtn.addEventListener("click", () => {
+            pendingSubmit = false;
+            closeModal();
+          });
+
+          confirmBtn.addEventListener("click", function () {
+            confirmBtn.disabled = true;
+            confirmBtn.innerHTML =
+              '<span class="loading-spinner"></span>Mengirim...';
+
+            const pesanan = getPesanan();
+            const totalPrice =
+              Object.values(pesanan).reduce((sum, day) => {
+                return sum + Object.values(day).reduce((a, b) => a + b, 0);
+              }, 0) * 2332;
+
+            console.log("Sending data:", {
+              nama: namaSelect.value,
+              pesanan: pesanan,
+              total: totalPrice,
+            });
+
+            fetch(
+              "https://script.google.com/macros/s/AKfycbzfdx9jFM6ygl22pL8iLPjBeOafUvCT3ug48yNTOhvEUbk858X3RPhwukjXkcWpJYES/exec",
+              {
+                method: "POST",
+                mode: "no-cors", // prevents CORS errors
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  nama: namaSelect.value,
+                  pesanan: pesanan,
+                  total: totalPrice,
+                }),
+              },
+            ).finally(() => {
+              orderSummary.innerHTML = `
+                            <div style="text-align:center;">
+                                <div style="font-size:40px;margin-bottom:10px;">✅</div>
+                                <h3 style="margin-bottom:8px;">Pesanan Berhasil!</h3>
+                                <p>Data Anda telah dikirim ke sistem.</p>
+                            </div>
+                        `;
+              confirmBtn.disabled = false;
+              confirmBtn.innerHTML = "Tutup";
+
+              confirmBtn.onclick = function () {
+                modal.classList.remove("show");
+                modal.setAttribute("aria-hidden", "true");
+
+                form.reset();
+                updateCounter();
+
+                cancelBtn.style.display = "inline-block";
+                confirmBtn.innerHTML = "Konfirmasi";
+              };
+            });
+          });
+
+          /* ESC KEY CLOSE */
+          document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && modal.classList.contains("show")) {
+              closeModal();
+            }
+          });
+
+          /* HERO CLEANUP + STARS */
+          function ensureHeroIsSection() {
+            const hero = document.querySelector(".hero");
+            if (!hero) return;
+            if (hero.tagName.toUpperCase() === "SECTION") return;
+
+            const section = document.createElement("section");
+            section.className = hero.className;
+
+            for (let i = 0; i < hero.attributes.length; i++) {
+              const attr = hero.attributes[i];
+              if (attr.name === "class") continue;
+              section.setAttribute(attr.name, attr.value);
+            }
+
+            while (hero.firstChild) {
+              section.appendChild(hero.firstChild);
+            }
+
+            hero.parentNode.replaceChild(section, hero);
+          }
+
+          function removeHtmlComments() {
+            const walker = document.createTreeWalker(
+              document,
+              NodeFilter.SHOW_COMMENT,
+              null,
+              false,
+            );
+            const comments = [];
+            let node = walker.nextNode();
+            while (node) {
+              comments.push(node);
+              node = walker.nextNode();
+            }
+            comments.forEach(
+              (c) => c.parentNode && c.parentNode.removeChild(c),
+            );
+          }
+
+          function createRandomStars(count = 140) {
+            const hero = document.querySelector(".hero");
+            if (!hero) return;
+
+            let container = hero.querySelector(".stars");
+            if (!container) {
+              container = document.createElement("div");
+              container.className = "stars";
+              hero.appendChild(container);
+            }
+
+            container.innerHTML = "";
+
+            for (let i = 0; i < count; i++) {
+              const star = document.createElement("span");
+              star.className = "star";
+              star.style.left = `${Math.random() * 100}%`;
+              star.style.top = `${Math.random() * 45 + 5}%`;
+              star.style.width = `${Math.random() * 2 + 0.8}px`;
+              star.style.height = star.style.width;
+              star.style.opacity = `${Math.random() * 0.7 + 0.3}`;
+              star.style.animation = `twinkle ${Math.random() * 3 + 2}s ease-in-out ${Math.random() * 2}s infinite`;
+              container.appendChild(star);
+            }
+          }
+
+          document.addEventListener("DOMContentLoaded", () => {
+            ensureHeroIsSection();
+            removeHtmlComments();
+            createRandomStars();
+            updateCounter();
+            updateWeekRange();
+          });
+        </script>
+      </div>
     </section>
-</body>
+
+    <!-- Report Section -->
+    <section class="section">
+      <div class="container">
+        <h2>
+          ⭐ Pesanan Hari
+          <span style="opacity: 0.8" class="clock" id="clock"></span>
+        </h2>
+        <div class="report" aria-label="Service information">
+          <div class="card" tabindex="0">
+            <div class="card-icon">🌅</div>
+            <p><strong>Isuk</strong> 06:00</p>
+            <h3 id="isuk-count">0</h3>
+            <div class="divider"></div>
+            <ul class="name-list" id="isuk-list"></ul>
+          </div>
+          <div class="card" tabindex="0">
+            <div class="card-icon">☀️</div>
+            <p><strong>Awan</strong> 14:00</p>
+            <h3 id="awan-count">0</h3>
+            <div class="divider"></div>
+            <ul class="name-list" id="awan-list"></ul>
+          </div>
+          <div class="card" tabindex="0">
+            <div class="card-icon">🌇</div>
+            <p><strong>Sore</strong> 18:00</p>
+            <h3 id="sore-count">0</h3>
+            <div class="divider"></div>
+            <ul class="name-list" id="sore-list"></ul>
+          </div>
+        </div>
+        <div class="form-footer">
+          <p style="color: white; font-size: 13px; font-weight: 700">
+            Mau membatalkan pesanan?
+          </p>
+          <a
+            href="https://wa.me/6289519044474?text=Halo%2C%20saya%20ingin%20membatalkan%20pesanan%20nasi"
+            class="whatsapp-cta"
+            target="_blank"
+            aria-label="Hubungi via WhatsApp untuk membatalkan"
+          >
+            <span>💬</span>
+            <span>Chat lewat WhatsApp</span>
+          </a>
+        </div>
+      </div>
+      <script>
+        const REPORT_URL =
+          "https://script.google.com/macros/s/AKfycbzfdx9jFM6ygl22pL8iLPjBeOafUvCT3ug48yNTOhvEUbk858X3RPhwukjXkcWpJYES/exec";
+
+        function renderNameList(ulId, names) {
+          const ul = document.getElementById(ulId);
+          ul.innerHTML = "";
+          names.forEach((nama) => {
+            const li = document.createElement("li");
+            li.textContent = nama;
+            ul.appendChild(li);
+          });
+        }
+
+        function loadReport() {
+          fetch(REPORT_URL)
+            .then((res) => res.json())
+            .then((data) => {
+              document.getElementById("isuk-count").textContent =
+                data.Isuk.length;
+              document.getElementById("awan-count").textContent =
+                data.Awan.length;
+              document.getElementById("sore-count").textContent =
+                data.Sore.length;
+
+              renderNameList("isuk-list", data.Isuk);
+              renderNameList("awan-list", data.Awan);
+              renderNameList("sore-list", data.Sore);
+            })
+            .catch((err) => console.error("Gagal ambil laporan:", err));
+        }
+        function updateClock() {
+          const now = new Date();
+
+          // Convert to WIB
+          const jakartaTime = new Date(
+            now.toLocaleString("en-US", { timeZone: "Asia/Jakarta" }),
+          );
+
+          const days = [
+            "Minggu",
+            "Senin",
+            "Selasa",
+            "Rabu",
+            "Kamis",
+            "Jumat",
+            "Sabtu",
+          ];
+          const months = [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "Mei",
+            "Jun",
+            "Jul",
+            "Agu",
+            "Sep",
+            "Okt",
+            "Nov",
+            "Des",
+          ];
+
+          const dayName = days[jakartaTime.getDay()];
+          const date = jakartaTime.getDate();
+          const month = months[jakartaTime.getMonth()];
+          const year = jakartaTime.getFullYear();
+
+          const hours = String(jakartaTime.getHours()).padStart(2, "0");
+          const minutes = String(jakartaTime.getMinutes()).padStart(2, "0");
+          const seconds = String(jakartaTime.getSeconds()).padStart(2, "0");
+
+          const formatted = `${dayName}, ${date} ${month} ${year} ${hours}:${minutes}:${seconds}`;
+
+          document.getElementById("clock").textContent = formatted;
+        }
+
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        loadReport();
+        setInterval(loadReport, 30000);
+      </script>
+    </section>
+  </body>
+  <footer class="site-footer">
+    <p>
+      Layanan Tumbas Nasi by
+
+      <a
+        href="https://www.instagram.com/rachelliacs"
+        target="_blank"
+        class="footer-credit"
+        >@rachelliacs</a
+      >
+    </p>
+  </footer>
 </html>
