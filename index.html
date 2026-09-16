@@ -1036,7 +1036,7 @@
         <div class="info" aria-label="Service information">
           <div class="card" tabindex="0">
             <div class="card-icon">⏰</div>
-            <h3>Jam Operasional</h3>
+            <h3>Jam Makan</h3>
             <p>
               <strong>🌅 Isuk:</strong> 06:00 | <strong>☀️ Awan:</strong> 14:00
               | <strong>🌇 Sore:</strong> 18:00
@@ -1791,12 +1791,16 @@
         const REPORT_URL =
           "https://script.google.com/macros/s/AKfycbzfdx9jFM6ygl22pL8iLPjBeOafUvCT3ug48yNTOhvEUbk858X3RPhwukjXkcWpJYES/exec";
 
-        function renderNameList(ulId, names) {
+        function renderNameList(ulId, entries) {
           const ul = document.getElementById(ulId);
           ul.innerHTML = "";
-          names.forEach((nama) => {
+          entries.forEach((entry) => {
             const li = document.createElement("li");
-            li.textContent = nama;
+            const icon = entry.onTime ? "✅" : "⚠️";
+            li.textContent = `${icon} ${entry.nama}`;
+            li.title = entry.onTime
+              ? "Disubmit hari Minggu (tepat waktu)"
+              : "Disubmit di luar hari Minggu (dadakan)";
             ul.appendChild(li);
           });
         }
