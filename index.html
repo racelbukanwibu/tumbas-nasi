@@ -1796,8 +1796,8 @@
           ul.innerHTML = "";
           entries.forEach((entry) => {
             const li = document.createElement("li");
-            const icon = entry.onTime ? "✅" : "⚠️";
-            li.textContent = `${icon} ${entry.nama}`;
+            const icon = entry.onTime ? "" : "(New)";
+            li.textContent = `${entry.nama} ${icon}`;
             li.title = entry.onTime
               ? "Disubmit hari Minggu (tepat waktu)"
               : "Disubmit di luar hari Minggu (dadakan)";
