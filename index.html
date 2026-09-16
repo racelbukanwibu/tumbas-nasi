@@ -1822,6 +1822,7 @@
             })
             .catch((err) => console.error("Gagal ambil laporan:", err));
         }
+
         function updateClock() {
           const now = new Date();
 
@@ -1868,13 +1869,68 @@
           document.getElementById("clock").textContent = formatted;
         }
 
-        updateClock();
-        setInterval(updateClock, 1000);
+        function loadPaymentSummary() {
+          fetch(REPORT_URL + "?type=payment")
+            .then((res) => res.json())
+            .then((data) => {
+              const tbody = document.getElementById("payment-tbody");
+              tbody.innerHTML = "";
+
+              if (data.length === 0) {
+                tbody.innerHTML =
+                  '<tr><td colspan="3" style="text-align:center;">Belum ada pesanan</td></tr>';
+                return;
+              }
+
+              data.forEach((item) => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+          <td style="text-align:left;">${item.nama}</td>
+          <td style="text-align:center;">${item.porsi}</td>
+          <td style="text-align:right;">Rp ${item.total.toLocaleString("id-ID")}</td>
+        `;
+                tbody.appendChild(tr);
+              });
+            })
+            .catch((err) =>
+              console.error("Gagal ambil rekap pembayaran:", err),
+            );
+        }
 
         loadReport();
         setInterval(loadReport, 30000);
+
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        loadPaymentSummary();
+        setInterval(loadPaymentSummary, 30000);
       </script>
     </section>
+
+    <!-- Payment Summary Section -->
+    <section class="section">
+      <div class="container">
+        <h2>💵 Rekap Pembayaran Minggu Ini</h2>
+        <div class="order" aria-label="Payment summary">
+          <table id="payment-table">
+            <thead>
+              <tr>
+                <th style="text-align: left">Nama</th>
+                <th>Porsi</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody id="payment-tbody">
+              <tr>
+                <td colspan="3" style="text-align: center">Memuat...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <!-- /Payment Summary Section -->
   </body>
   <footer class="site-footer">
     <p>
