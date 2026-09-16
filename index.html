@@ -1455,6 +1455,12 @@
             document.getElementById("week-range").textContent =
               `${formatShort(monday)} - ${formatShort(sunday)} ${sunday.getFullYear()}`;
 
+            const paymentWeekRangeEl =
+              document.getElementById("payment-week-range");
+            if (paymentWeekRangeEl) {
+              paymentWeekRangeEl.textContent = `${formatShort(monday)} - ${formatShort(sunday)} ${sunday.getFullYear()}`;
+            }
+
             document.getElementById("ideal-sunday-date").textContent =
               format(idealSunday);
             document.getElementById("next-ideal-date").textContent =
@@ -1911,7 +1917,10 @@
     <!-- Payment Summary Section -->
     <section class="section">
       <div class="container">
-        <h2>💵 Rekap Pembayaran Minggu Ini</h2>
+        <h2>
+          💵 Rekap Pembayaran Minggu Ini Tanggal
+          <span style="opacity: 0.8" id="payment-week-range">-</span>
+        </h2>
         <div class="order" aria-label="Payment summary">
           <table id="payment-table">
             <thead>
