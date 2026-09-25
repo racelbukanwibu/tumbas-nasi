@@ -1677,7 +1677,7 @@
         );
 
         const day = jakartaTime.getDay(); // 0=Minggu, 1=Senin, ...
-        const diffToMonday = day === 0 ? -6 : 1 - day;
+        const diffToMonday = day === 0 ? 1 : 1 - day;
 
         const monday = new Date(jakartaTime);
         monday.setDate(jakartaTime.getDate() + diffToMonday);
