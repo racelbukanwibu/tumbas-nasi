@@ -11,99 +11,86 @@
       rel="stylesheet"
     />
     <style>
+      /* ============ Animations ============ */
       @keyframes twinkle {
         0%,
         to {
           opacity: 0.2;
           transform: translate(-50%, -50%) scale(0.9);
         }
-
         50% {
           opacity: 1;
           transform: translate(-50%, -50%) scale(1.2);
         }
       }
-
       @keyframes drift {
         0%,
         to {
           transform: translateX(0);
         }
-
         50% {
           transform: translateX(8px);
         }
       }
-
       @keyframes fadeInDown {
         0% {
           opacity: 0;
           transform: translateY(-30px);
         }
-
         to {
           opacity: 1;
           transform: translateY(0);
         }
       }
-
       @keyframes fadeInUp {
         0% {
           opacity: 0;
           transform: translateY(30px);
         }
-
         to {
           opacity: 1;
           transform: translateY(0);
         }
       }
-
       @keyframes glow {
         0%,
         to {
           box-shadow: 0 15px 35px rgba(255, 232, 193, 0.25);
         }
-
         50% {
           box-shadow: 0 15px 50px rgba(255, 232, 193, 0.45);
         }
       }
-
       @keyframes fadeIn {
         0% {
           opacity: 0;
         }
-
         to {
           opacity: 1;
         }
       }
-
       @keyframes slideUp {
         0% {
           opacity: 0;
           transform: translateY(30px);
         }
-
         to {
           opacity: 1;
           transform: translateY(0);
         }
       }
-
       @keyframes slideInRight {
         0% {
           opacity: 0;
           transform: translateX(50px);
         }
-
         to {
           opacity: 1;
           transform: translateX(0);
         }
       }
 
+      /* ============ Reset & base ============ */
       *,
       body {
         margin: 0;
@@ -148,6 +135,20 @@
         overflow-x: hidden;
       }
 
+      section {
+        max-width: 100vw;
+        overflow: hidden;
+        padding: 56px 0;
+      }
+
+      .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 80px;
+        image-rendering: pixelated;
+      }
+
+      /* ============ Floating nav ============ */
       .floating-nav {
         position: fixed;
         z-index: 500;
@@ -219,19 +220,7 @@
         }
       }
 
-      section {
-        max-width: 100vw;
-        overflow: hidden;
-        padding: 56px 0;
-      }
-
-      .container {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding: 0 80px;
-        image-rendering: pixelated;
-      }
-
+      /* ============ Hero ============ */
       .hero {
         position: relative;
         padding: 60px 48px;
@@ -263,6 +252,7 @@
         pointer-events: none;
         z-index: 2;
         overflow: visible;
+        animation: drift 8s ease-in-out infinite;
       }
 
       .hero .star {
@@ -305,21 +295,6 @@
         border-right: 6px solid transparent;
         border-top: 8px solid rgba(0, 0, 0, 0.7);
         z-index: 5;
-      }
-
-      .week-info-banner {
-        background: rgba(0, 0, 0, 0.6);
-        color: orange;
-        border: 2px solid orange;
-        padding: 12px 18px;
-        margin-bottom: 24px;
-        font-size: 14px;
-        line-height: 1.6;
-        text-align: center;
-      }
-
-      .hero .stars {
-        animation: drift 8s ease-in-out infinite;
       }
 
       .cta-button::before,
@@ -421,6 +396,7 @@
         outline-offset: 2px;
       }
 
+      /* ============ Info & report card grid ============ */
       .info,
       .report {
         display: grid;
@@ -439,7 +415,7 @@
         image-rendering: pixelated;
         clip-path: polygon(
           20px 0,
-          100%0,
+          100% 0,
           100% 20px,
           100% 100%,
           80px 100%,
@@ -497,6 +473,7 @@
         margin-bottom: 0px;
       }
 
+      /* ============ CTA block ============ */
       .cta {
         text-align: center;
         padding: 60px 50px;
@@ -533,30 +510,6 @@
         letter-spacing: 0.2px;
       }
 
-      @media (max-width: 768px) {
-        h1 {
-          font-size: 36px;
-        }
-
-        .tagline {
-          font-size: 18px;
-        }
-
-        .cta,
-        .menu-section {
-          padding: 25px;
-        }
-
-        .card h3 {
-          font-size: 24px;
-        }
-
-        .cta-button {
-          padding: 14px 32px;
-          font-size: 16px;
-        }
-      }
-
       .card:focus,
       .menu-item:focus,
       .testimonial:focus {
@@ -567,6 +520,18 @@
       :focus-visible {
         outline: 2px solid orange;
         outline-offset: 2px;
+      }
+
+      /* ============ Order form ============ */
+      .week-info-banner {
+        background: rgba(0, 0, 0, 0.6);
+        color: orange;
+        border: 2px solid orange;
+        padding: 12px 18px;
+        margin-bottom: 24px;
+        font-size: 14px;
+        line-height: 1.6;
+        text-align: center;
       }
 
       #submitBtn,
@@ -582,7 +547,7 @@
         overflow: hidden;
         clip-path: polygon(
           20px 0,
-          100%0,
+          100% 0,
           100% 20px,
           100% 100%,
           80px 100%,
@@ -765,6 +730,7 @@
         background-color: #fff;
       }
 
+      /* ============ Tables ============ */
       table {
         width: 100%;
         border-collapse: separate;
@@ -798,6 +764,15 @@
         vertical-align: middle;
       }
 
+      .day-date {
+        display: block;
+        font-size: 10px;
+        font-weight: 400;
+        opacity: 0.75;
+        margin-top: 2px;
+      }
+
+      /* ============ Price display ============ */
       .price-label {
         color: #2d4a04;
         font-weight: 700;
@@ -823,6 +798,7 @@
         opacity: 0.85;
       }
 
+      /* ============ Confirmation modal ============ */
       .modal {
         display: none;
         position: fixed;
@@ -916,6 +892,7 @@
         box-shadow: 0 10px 25px rgba(255, 232, 193, 0.3);
       }
 
+      /* ============ Toast ============ */
       .toast {
         display: none;
         position: fixed;
@@ -936,6 +913,52 @@
         display: block;
       }
 
+      /* ============ Report name lists ============ */
+      .divider {
+        height: 2px;
+        background: #2d4a04;
+        margin: 12px 0;
+        opacity: 0.4;
+      }
+
+      .name-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 14px;
+      }
+
+      .name-list li {
+        padding: 4px 0;
+        border-bottom: 1px dashed rgba(45, 74, 4, 0.3);
+      }
+
+      /* ============ Footer ============ */
+      .site-footer {
+        text-align: center;
+        padding: 24px 20px;
+        background: rgba(0, 0, 0, 0.4);
+        border-top: 3px solid #2d4a04;
+        image-rendering: pixelated;
+      }
+
+      .site-footer p {
+        margin: 0;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.7);
+        letter-spacing: 0.3px;
+      }
+
+      .footer-credit {
+        color: orange;
+        font-weight: 600;
+      }
+
+      .footer-credit a {
+        text-decoration: none;
+      }
+
+      /* ============ Responsive ============ */
       @media (max-width: 1024px) {
         .tagline {
           font-size: 14px;
@@ -1040,52 +1063,34 @@
           font-size: 8px;
         }
       }
-      .divider {
-        height: 2px;
-        background: #2d4a04;
-        margin: 12px 0;
-        opacity: 0.4;
-      }
 
-      .name-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        font-size: 14px;
-      }
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 36px;
+        }
 
-      .name-list li {
-        padding: 4px 0;
-        border-bottom: 1px dashed rgba(45, 74, 4, 0.3);
-      }
+        .tagline {
+          font-size: 18px;
+        }
 
-      .site-footer {
-        text-align: center;
-        padding: 24px 20px;
-        background: rgba(0, 0, 0, 0.4);
-        border-top: 3px solid #2d4a04;
-        image-rendering: pixelated;
-      }
+        .cta,
+        .menu-section {
+          padding: 25px;
+        }
 
-      .site-footer p {
-        margin: 0;
-        font-size: 13px;
-        color: rgba(255, 255, 255, 0.7);
-        letter-spacing: 0.3px;
-      }
+        .card h3 {
+          font-size: 24px;
+        }
 
-      .footer-credit {
-        color: orange;
-        font-weight: 600;
-      }
-
-      .footer-credit a {
-        text-decoration: none;
+        .cta-button {
+          padding: 14px 32px;
+          font-size: 16px;
+        }
       }
     </style>
   </head>
   <body>
-    <!-- Floating Nav -->
+    <!-- start: floating nav -->
     <nav class="floating-nav" aria-label="Navigasi cepat">
       <a href="#hero" class="nav-dot" aria-label="Beranda" title="Beranda"
         >🏠</a
@@ -1103,8 +1108,9 @@
         >💵</a
       >
     </nav>
+    <!-- end: floating nav -->
 
-    <!-- Hero Section -->
+    <!-- start: hero -->
     <section class="section hero" id="hero">
       <div class="container">
         <h1>Tumbas Nasi</h1>
@@ -1118,8 +1124,9 @@
         <div class="address-pointer">📍 Mulyosasi Mas C 10</div>
       </div>
     </section>
+    <!-- end: hero -->
 
-    <!-- Info Section -->
+    <!-- start: info -->
     <section class="section" id="info">
       <div class="container">
         <h2>⭐ Informasi Layanan</h2>
@@ -1144,8 +1151,9 @@
         </div>
       </div>
     </section>
+    <!-- end: info -->
 
-    <!-- Order Form Section -->
+    <!-- start: order form -->
     <section class="section" id="order">
       <div class="container">
         <h2>⭐ Formulir Pemesanan</h2>
@@ -1225,7 +1233,7 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>Senin</td>
+                    <td>Senin<span class="day-date" id="date-Senin"></span></td>
                     <td>
                       <input
                         type="checkbox"
@@ -1252,7 +1260,9 @@
                     </td>
                   </tr>
                   <tr>
-                    <td>Selasa</td>
+                    <td>
+                      Selasa<span class="day-date" id="date-Selasa"></span>
+                    </td>
                     <td>
                       <input
                         type="checkbox"
@@ -1279,7 +1289,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td>Rabu</td>
+                    <td>Rabu<span class="day-date" id="date-Rabu"></span></td>
                     <td>
                       <input
                         type="checkbox"
@@ -1306,7 +1316,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td>Kamis</td>
+                    <td>Kamis<span class="day-date" id="date-Kamis"></span></td>
                     <td>
                       <input
                         type="checkbox"
@@ -1333,7 +1343,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td>Jumat</td>
+                    <td>Jumat<span class="day-date" id="date-Jumat"></span></td>
                     <td>
                       <input
                         type="checkbox"
@@ -1360,7 +1370,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td>Sabtu</td>
+                    <td>Sabtu<span class="day-date" id="date-Sabtu"></span></td>
                     <td>
                       <input
                         type="checkbox"
@@ -1387,7 +1397,9 @@
                     </td>
                   </tr>
                   <tr>
-                    <td>Minggu</td>
+                    <td>
+                      Minggu<span class="day-date" id="date-Minggu"></span>
+                    </td>
                     <td>
                       <input
                         type="checkbox"
@@ -1417,7 +1429,6 @@
               </table>
             </div>
 
-            <!-- Price Display -->
             <div class="price-display">
               <div class="price-label">Total</div>
               <div class="price-amount" id="priceAmount">Rp 0</div>
@@ -1432,7 +1443,6 @@
           </form>
         </div>
 
-        <!-- Confirmation Modal -->
         <div
           id="confirmationModal"
           class="modal"
@@ -1468,7 +1478,6 @@
           </div>
         </div>
 
-        <!-- Toast Notification -->
         <div
           id="toast"
           class="toast"
@@ -1476,420 +1485,11 @@
           aria-live="polite"
           aria-atomic="true"
         ></div>
-
-        <script>
-          const form = document.getElementById("orderForm");
-          const namaSelect = document.getElementById("Nama");
-          const checkboxes = document.querySelectorAll(".checkbox-item");
-          const selectionCounter = document.querySelector(".selection-counter");
-          const priceAmount = document.getElementById("priceAmount");
-          const priceBreakdown = document.getElementById("priceBreakdown");
-          const modal = document.getElementById("confirmationModal");
-          const cancelBtn = document.getElementById("cancelBtn");
-          const confirmBtn = document.getElementById("confirmBtn");
-          const submitBtn = document.getElementById("submitBtn");
-          const toast = document.getElementById("toast");
-          const orderSummary = document.getElementById("orderSummary");
-
-          let pendingSubmit = false;
-          let bypassSubmitHandler = false;
-
-          /* UPDATE COUNTER + PRICE */
-          function updateCounter() {
-            const count = document.querySelectorAll(
-              ".checkbox-item:checked",
-            ).length;
-            selectionCounter.textContent = `${count} terpilih`;
-
-            const totalPrice = count * 3100;
-            priceAmount.textContent = `Rp ${totalPrice.toLocaleString("id-ID")}`;
-            priceBreakdown.textContent = `(${count} porsi × Rp 3.100)`;
-
-            return count;
-          }
-
-          function updateWeekRange() {
-            const now = new Date();
-            const jakartaTime = new Date(
-              now.toLocaleString("en-US", { timeZone: "Asia/Jakarta" }),
-            );
-
-            const day = jakartaTime.getDay(); // 0=Minggu, 1=Senin, ...
-            const diffToMonday = day === 0 ? -6 : 1 - day;
-
-            const monday = new Date(jakartaTime);
-            monday.setDate(jakartaTime.getDate() + diffToMonday);
-
-            const sunday = new Date(monday);
-            sunday.setDate(monday.getDate() + 6);
-
-            // Minggu kemarin (sehari sebelum Senin minggu ini) = waktu ideal submit untuk minggu ini
-            const idealSunday = new Date(monday);
-            idealSunday.setDate(monday.getDate() - 1);
-
-            // Akhir minggu selanjutnya (Minggu, penutup minggu depan) = deadline ideal submit berikutnya
-            const nextIdealSunday = sunday;
-
-            const months = [
-              "Jan",
-              "Feb",
-              "Mar",
-              "Apr",
-              "Mei",
-              "Jun",
-              "Jul",
-              "Agu",
-              "Sep",
-              "Okt",
-              "Nov",
-              "Des",
-            ];
-            const format = (d) =>
-              `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
-            const formatShort = (d) => `${d.getDate()} ${months[d.getMonth()]}`;
-
-            document.getElementById("week-range").textContent =
-              `${formatShort(monday)} - ${formatShort(sunday)} ${sunday.getFullYear()}`;
-
-            const paymentWeekRangeEl =
-              document.getElementById("payment-week-range");
-            if (paymentWeekRangeEl) {
-              paymentWeekRangeEl.textContent = `${formatShort(monday)} - ${formatShort(sunday)} ${sunday.getFullYear()}`;
-            }
-
-            document.getElementById("ideal-sunday-date").textContent =
-              format(idealSunday);
-            document.getElementById("next-ideal-date").textContent =
-              format(nextIdealSunday);
-          }
-
-          checkboxes.forEach((cb) => {
-            cb.addEventListener("change", updateCounter);
-          });
-
-          /* VALIDATION */
-          function validateForm() {
-            let isValid = true;
-
-            // Validate name
-            const nameGroup = namaSelect.closest(".form-group");
-            const nameError = nameGroup.querySelector(
-              ".validation-message.error",
-            );
-
-            if (!namaSelect.value) {
-              nameGroup.classList.add("invalid");
-              nameGroup.classList.remove("valid");
-              if (nameError) nameError.classList.add("show");
-              isValid = false;
-            } else {
-              nameGroup.classList.remove("invalid");
-              nameGroup.classList.add("valid");
-              if (nameError) nameError.classList.remove("show");
-            }
-
-            // Validate checkboxes
-            const checkedCount = document.querySelectorAll(
-              ".checkbox-item:checked",
-            ).length;
-            const firstCheckbox = document.querySelector(".checkbox-item");
-
-            if (firstCheckbox) {
-              const checkboxGroup = firstCheckbox.closest(".form-group");
-              const errorMsg = checkboxGroup.querySelector(
-                ".validation-message.error",
-              );
-
-              if (checkedCount === 0) {
-                checkboxGroup.classList.add("invalid");
-                checkboxGroup.classList.remove("valid");
-                if (errorMsg) errorMsg.classList.add("show");
-                isValid = false;
-              } else {
-                checkboxGroup.classList.remove("invalid");
-                checkboxGroup.classList.add("valid");
-                if (errorMsg) errorMsg.classList.remove("show");
-              }
-            }
-
-            return isValid;
-          }
-
-          /* BUILD ORDER SUMMARY */
-          function buildOrderSummary() {
-            const pesanan = getPesanan();
-            const days = Object.keys(pesanan);
-            const totalSelected = days.reduce(
-              (sum, day) =>
-                sum + Object.values(pesanan[day]).reduce((a, b) => a + b, 0),
-              0,
-            );
-            const totalPrice = totalSelected * 2332;
-
-            let summary = `<div><strong>📝 Nama:</strong> ${namaSelect.value}</div>`;
-            summary += `<div><strong>📅 Pesanan:</strong> ${totalSelected} porsi</div>`;
-
-            summary += `<table style="width:100%; margin-top:10px; border-collapse: collapse;">
-                    <thead>
-                        <tr style="background: rgba(255,232,193,0.2);">
-                        <th style="padding:5px; text-align:left;">Hari</th>
-                        <th style="padding:5px; text-align:center;">Isuk</th>
-                        <th style="padding:5px; text-align:center;">Awan</th>
-                        <th style="padding:5px; text-align:center;">Sore</th>
-                        </tr>
-                    </thead>
-                    <tbody>`;
-
-            days.forEach((day) => {
-              const slots = pesanan[day];
-              summary += `<tr>
-                        <td style="padding:5px;">${day}</td>
-                        <td style="text-align:center;">${slots.Isuk ? "✅" : "-"}</td>
-                        <td style="text-align:center;">${slots.Awan ? "✅" : "-"}</td>
-                        <td style="text-align:center;">${slots.Sore ? "✅" : "-"}</td>
-                        </tr>`;
-            });
-
-            summary += `</tbody></table>`;
-            summary += `<div style="margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,232,193,0.2);">
-                    <strong>💰 Total:</strong> Rp ${totalPrice.toLocaleString("id-ID")}
-                    </div>`;
-
-            return summary;
-          }
-
-          /* GET PESANAN PER DAY/TIME */
-          function getPesanan() {
-            const pesanan = {};
-            checkboxes.forEach((cb) => {
-              if (cb.checked) {
-                const day = cb
-                  .closest("tr")
-                  .querySelector("td:first-child")
-                  .textContent.trim();
-                if (!pesanan[day]) pesanan[day] = { Isuk: 0, Awan: 0, Sore: 0 };
-                pesanan[day][cb.value] = 1; // set value to 1 if checked
-              }
-            });
-            return pesanan;
-          }
-
-          /* MODAL CONTROL */
-          function showConfirmationModal() {
-            if (validateForm()) {
-              orderSummary.innerHTML = buildOrderSummary();
-              modal.classList.add("show");
-              modal.setAttribute("aria-hidden", "false");
-              cancelBtn.focus();
-            }
-          }
-
-          function closeModal() {
-            modal.classList.remove("show");
-            modal.setAttribute("aria-hidden", "true");
-            submitBtn.focus();
-          }
-
-          /* FORM SUBMIT HANDLER */
-          form.addEventListener("submit", (e) => {
-            if (bypassSubmitHandler) return true;
-
-            e.preventDefault();
-            pendingSubmit = true;
-            showConfirmationModal();
-          });
-
-          /* MODAL BUTTONS */
-          cancelBtn.addEventListener("click", () => {
-            pendingSubmit = false;
-            closeModal();
-          });
-
-          confirmBtn.addEventListener("click", function () {
-            confirmBtn.disabled = true;
-            confirmBtn.innerHTML =
-              '<span class="loading-spinner"></span>Mengirim...';
-
-            const pesanan = getPesanan();
-            const totalPrice =
-              Object.values(pesanan).reduce((sum, day) => {
-                return sum + Object.values(day).reduce((a, b) => a + b, 0);
-              }, 0) * 2332;
-
-            console.log("Sending data:", {
-              nama: namaSelect.value,
-              pesanan: pesanan,
-              total: totalPrice,
-            });
-
-            fetch(
-              "https://script.google.com/macros/s/AKfycbzfdx9jFM6ygl22pL8iLPjBeOafUvCT3ug48yNTOhvEUbk858X3RPhwukjXkcWpJYES/exec",
-              {
-                method: "POST",
-                mode: "no-cors", // prevents CORS errors
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  nama: namaSelect.value,
-                  pesanan: pesanan,
-                  total: totalPrice,
-                }),
-              },
-            ).finally(() => {
-              orderSummary.innerHTML = `
-                            <div style="text-align:center;">
-                                <div style="font-size:40px;margin-bottom:10px;">✅</div>
-                                <h3 style="margin-bottom:8px;">Pesanan Berhasil!</h3>
-                                <p>Data Anda telah dikirim ke sistem.</p>
-                            </div>
-                        `;
-              confirmBtn.disabled = false;
-              confirmBtn.innerHTML = "Tutup";
-
-              confirmBtn.onclick = function () {
-                modal.classList.remove("show");
-                modal.setAttribute("aria-hidden", "true");
-
-                form.reset();
-                updateCounter();
-
-                cancelBtn.style.display = "inline-block";
-                confirmBtn.innerHTML = "Konfirmasi";
-              };
-            });
-          });
-
-          /* ESC KEY CLOSE */
-          document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape" && modal.classList.contains("show")) {
-              closeModal();
-            }
-          });
-
-          /* HERO CLEANUP + STARS */
-          function ensureHeroIsSection() {
-            const hero = document.querySelector(".hero");
-            if (!hero) return;
-            if (hero.tagName.toUpperCase() === "SECTION") return;
-
-            const section = document.createElement("section");
-            section.className = hero.className;
-
-            for (let i = 0; i < hero.attributes.length; i++) {
-              const attr = hero.attributes[i];
-              if (attr.name === "class") continue;
-              section.setAttribute(attr.name, attr.value);
-            }
-
-            while (hero.firstChild) {
-              section.appendChild(hero.firstChild);
-            }
-
-            hero.parentNode.replaceChild(section, hero);
-          }
-
-          function removeHtmlComments() {
-            const walker = document.createTreeWalker(
-              document,
-              NodeFilter.SHOW_COMMENT,
-              null,
-              false,
-            );
-            const comments = [];
-            let node = walker.nextNode();
-            while (node) {
-              comments.push(node);
-              node = walker.nextNode();
-            }
-            comments.forEach(
-              (c) => c.parentNode && c.parentNode.removeChild(c),
-            );
-          }
-
-          function createRandomStars(count = 140) {
-            const hero = document.querySelector(".hero");
-            if (!hero) return;
-
-            let container = hero.querySelector(".stars");
-            if (!container) {
-              container = document.createElement("div");
-              container.className = "stars";
-              hero.appendChild(container);
-            }
-
-            container.innerHTML = "";
-
-            for (let i = 0; i < count; i++) {
-              const star = document.createElement("span");
-              star.className = "star";
-              star.style.left = `${Math.random() * 100}%`;
-              star.style.top = `${Math.random() * 45 + 5}%`;
-              star.style.width = `${Math.random() * 2 + 0.8}px`;
-              star.style.height = star.style.width;
-              star.style.opacity = `${Math.random() * 0.7 + 0.3}`;
-              star.style.animation = `twinkle ${Math.random() * 3 + 2}s ease-in-out ${Math.random() * 2}s infinite`;
-              container.appendChild(star);
-            }
-          }
-
-          function setupNavAutoHide() {
-            const nav = document.querySelector(".floating-nav");
-            const hero = document.getElementById("hero");
-            const footer = document.querySelector(".site-footer");
-            if (!nav) return;
-
-            let heroVisible = false;
-            let footerVisible = false;
-
-            function updateNavVisibility() {
-              if (heroVisible || footerVisible) {
-                nav.classList.add("hidden");
-              } else {
-                nav.classList.remove("hidden");
-              }
-            }
-
-            if (hero) {
-              const heroObserver = new IntersectionObserver(
-                (entries) => {
-                  entries.forEach((entry) => {
-                    heroVisible = entry.isIntersecting;
-                    updateNavVisibility();
-                  });
-                },
-                { threshold: 0.3 },
-              );
-              heroObserver.observe(hero);
-            }
-
-            if (footer) {
-              const footerObserver = new IntersectionObserver(
-                (entries) => {
-                  entries.forEach((entry) => {
-                    footerVisible = entry.isIntersecting;
-                    updateNavVisibility();
-                  });
-                },
-                { threshold: 0.15 },
-              );
-              footerObserver.observe(footer);
-            }
-          }
-
-          document.addEventListener("DOMContentLoaded", () => {
-            ensureHeroIsSection();
-            removeHtmlComments();
-            createRandomStars();
-            updateCounter();
-            updateWeekRange();
-            setupNavAutoHide();
-          });
-        </script>
       </div>
     </section>
+    <!-- end: order form -->
 
-    <!-- Report Section -->
+    <!-- start: report -->
     <section class="section" id="report">
       <div class="container">
         <h2>
@@ -1934,128 +1534,10 @@
           </a>
         </div>
       </div>
-      <script>
-        const REPORT_URL =
-          "https://script.google.com/macros/s/AKfycbzfdx9jFM6ygl22pL8iLPjBeOafUvCT3ug48yNTOhvEUbk858X3RPhwukjXkcWpJYES/exec";
-
-        function renderNameList(ulId, entries) {
-          const ul = document.getElementById(ulId);
-          ul.innerHTML = "";
-          entries.forEach((entry) => {
-            const li = document.createElement("li");
-            const icon = entry.onTime ? "" : "(New)";
-            li.textContent = `${entry.nama} ${icon}`;
-            li.title = entry.onTime
-              ? "Disubmit hari Minggu (tepat waktu)"
-              : "Disubmit di luar hari Minggu (dadakan)";
-            ul.appendChild(li);
-          });
-        }
-
-        function loadReport() {
-          fetch(REPORT_URL)
-            .then((res) => res.json())
-            .then((data) => {
-              document.getElementById("isuk-count").textContent =
-                data.Isuk.length;
-              document.getElementById("awan-count").textContent =
-                data.Awan.length;
-              document.getElementById("sore-count").textContent =
-                data.Sore.length;
-
-              renderNameList("isuk-list", data.Isuk);
-              renderNameList("awan-list", data.Awan);
-              renderNameList("sore-list", data.Sore);
-            })
-            .catch((err) => console.error("Gagal ambil laporan:", err));
-        }
-
-        function updateClock() {
-          const now = new Date();
-
-          // Convert to WIB
-          const jakartaTime = new Date(
-            now.toLocaleString("en-US", { timeZone: "Asia/Jakarta" }),
-          );
-
-          const days = [
-            "Minggu",
-            "Senin",
-            "Selasa",
-            "Rabu",
-            "Kamis",
-            "Jumat",
-            "Sabtu",
-          ];
-          const months = [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "Mei",
-            "Jun",
-            "Jul",
-            "Agu",
-            "Sep",
-            "Okt",
-            "Nov",
-            "Des",
-          ];
-
-          const dayName = days[jakartaTime.getDay()];
-          const date = jakartaTime.getDate();
-          const month = months[jakartaTime.getMonth()];
-          const year = jakartaTime.getFullYear();
-
-          const hours = String(jakartaTime.getHours()).padStart(2, "0");
-          const minutes = String(jakartaTime.getMinutes()).padStart(2, "0");
-          const seconds = String(jakartaTime.getSeconds()).padStart(2, "0");
-
-          const formatted = `${dayName}, ${date} ${month} ${year} ${hours}:${minutes}:${seconds}`;
-
-          document.getElementById("clock").textContent = formatted;
-        }
-
-        function loadPaymentSummary() {
-          fetch(REPORT_URL + "?type=payment")
-            .then((res) => res.json())
-            .then((data) => {
-              const tbody = document.getElementById("payment-tbody");
-              tbody.innerHTML = "";
-
-              if (data.length === 0) {
-                tbody.innerHTML =
-                  '<tr><td colspan="3" style="text-align:center;">Belum ada pesanan</td></tr>';
-                return;
-              }
-
-              data.forEach((item) => {
-                const tr = document.createElement("tr");
-                tr.innerHTML = `
-          <td style="text-align:left;">${item.nama}</td>
-          <td style="text-align:center;">${item.porsi}</td>
-          <td style="text-align:right;">Rp ${item.total.toLocaleString("id-ID")}</td>
-        `;
-                tbody.appendChild(tr);
-              });
-            })
-            .catch((err) =>
-              console.error("Gagal ambil rekap pembayaran:", err),
-            );
-        }
-
-        loadReport();
-        setInterval(loadReport, 30000);
-
-        updateClock();
-        setInterval(updateClock, 1000);
-
-        loadPaymentSummary();
-        setInterval(loadPaymentSummary, 30000);
-      </script>
     </section>
+    <!-- end: report -->
 
-    <!-- Payment Summary Section -->
+    <!-- start: payment summary -->
     <section class="section" id="payment">
       <div class="container">
         <h2>
@@ -2094,16 +1576,546 @@
         </div>
       </div>
     </section>
+    <!-- end: payment summary -->
+
+    <!-- start: footer -->
+    <footer class="site-footer">
+      <p>
+        Layanan Tumbas Nasi by
+        <a
+          href="https://www.instagram.com/rachelliacs"
+          target="_blank"
+          class="footer-credit"
+          >@rachelliacs</a
+        >
+      </p>
+    </footer>
+    <!-- end: footer -->
+
+    <script>
+      // ===== Config =====
+      const REPORT_URL =
+        "https://script.google.com/macros/s/AKfycbzfdx9jFM6ygl22pL8iLPjBeOafUvCT3ug48yNTOhvEUbk858X3RPhwukjXkcWpJYES/exec";
+      const PRICE_PER_PORSI = 3100;
+      const SUMMARY_PRICE_PER_PORSI = 2332; // price shown in order summary/price display
+      const DAY_ORDER = [
+        "Senin",
+        "Selasa",
+        "Rabu",
+        "Kamis",
+        "Jumat",
+        "Sabtu",
+        "Minggu",
+      ];
+      const MONTHS_SHORT = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "Mei",
+        "Jun",
+        "Jul",
+        "Agu",
+        "Sep",
+        "Okt",
+        "Nov",
+        "Des",
+      ];
+      const DAY_NAMES = [
+        "Minggu",
+        "Senin",
+        "Selasa",
+        "Rabu",
+        "Kamis",
+        "Jumat",
+        "Sabtu",
+      ];
+
+      // ===== Element references =====
+      const form = document.getElementById("orderForm");
+      const namaSelect = document.getElementById("Nama");
+      const checkboxes = document.querySelectorAll(".checkbox-item");
+      const selectionCounter = document.querySelector(".selection-counter");
+      const priceAmount = document.getElementById("priceAmount");
+      const priceBreakdown = document.getElementById("priceBreakdown");
+      const modal = document.getElementById("confirmationModal");
+      const cancelBtn = document.getElementById("cancelBtn");
+      const confirmBtn = document.getElementById("confirmBtn");
+      const submitBtn = document.getElementById("submitBtn");
+      const toast = document.getElementById("toast");
+      const orderSummary = document.getElementById("orderSummary");
+
+      let pendingSubmit = false;
+      let bypassSubmitHandler = false;
+
+      // ===== Order form: selection counter + price =====
+      function updateCounter() {
+        const count = document.querySelectorAll(
+          ".checkbox-item:checked",
+        ).length;
+        selectionCounter.textContent = `${count} terpilih`;
+
+        const totalPrice = count * PRICE_PER_PORSI;
+        priceAmount.textContent = `Rp ${totalPrice.toLocaleString("id-ID")}`;
+        priceBreakdown.textContent = `(${count} porsi × Rp 3.100)`;
+
+        return count;
+      }
+
+      checkboxes.forEach((cb) => {
+        cb.addEventListener("change", updateCounter);
+      });
+
+      // ===== Week range + per-day dates in the form =====
+      function updateWeekRange() {
+        const now = new Date();
+        const jakartaTime = new Date(
+          now.toLocaleString("en-US", { timeZone: "Asia/Jakarta" }),
+        );
+
+        const day = jakartaTime.getDay(); // 0=Minggu, 1=Senin, ...
+        const diffToMonday = day === 0 ? -6 : 1 - day;
+
+        const monday = new Date(jakartaTime);
+        monday.setDate(jakartaTime.getDate() + diffToMonday);
+
+        const sunday = new Date(monday);
+        sunday.setDate(monday.getDate() + 6);
+
+        // Last Sunday (day before this week's Monday) = ideal submit time for this week
+        const idealSunday = new Date(monday);
+        idealSunday.setDate(monday.getDate() - 1);
+
+        // End of next week (Sunday) = ideal deadline for the next submission
+        const nextIdealSunday = sunday;
+
+        const format = (d) =>
+          `${d.getDate()} ${MONTHS_SHORT[d.getMonth()]} ${d.getFullYear()}`;
+        const formatShort = (d) =>
+          `${d.getDate()} ${MONTHS_SHORT[d.getMonth()]}`;
+
+        // Fill in each day's date label in the order table
+        DAY_ORDER.forEach((dayName, i) => {
+          const d = new Date(monday);
+          d.setDate(monday.getDate() + i);
+          const el = document.getElementById(`date-${dayName}`);
+          if (el) el.textContent = formatShort(d);
+        });
+
+        document.getElementById("week-range").textContent =
+          `${formatShort(monday)} - ${formatShort(sunday)} ${sunday.getFullYear()}`;
+
+        const paymentWeekRangeEl =
+          document.getElementById("payment-week-range");
+        if (paymentWeekRangeEl) {
+          paymentWeekRangeEl.textContent = `${formatShort(monday)} - ${formatShort(sunday)} ${sunday.getFullYear()}`;
+        }
+
+        document.getElementById("ideal-sunday-date").textContent =
+          format(idealSunday);
+        document.getElementById("next-ideal-date").textContent =
+          format(nextIdealSunday);
+      }
+
+      // ===== Order form: validation =====
+      function validateForm() {
+        let isValid = true;
+
+        // Validate name
+        const nameGroup = namaSelect.closest(".form-group");
+        const nameError = nameGroup.querySelector(".validation-message.error");
+
+        if (!namaSelect.value) {
+          nameGroup.classList.add("invalid");
+          nameGroup.classList.remove("valid");
+          if (nameError) nameError.classList.add("show");
+          isValid = false;
+        } else {
+          nameGroup.classList.remove("invalid");
+          nameGroup.classList.add("valid");
+          if (nameError) nameError.classList.remove("show");
+        }
+
+        // Validate checkboxes
+        const checkedCount = document.querySelectorAll(
+          ".checkbox-item:checked",
+        ).length;
+        const firstCheckbox = document.querySelector(".checkbox-item");
+
+        if (firstCheckbox) {
+          const checkboxGroup = firstCheckbox.closest(".form-group");
+          const errorMsg = checkboxGroup.querySelector(
+            ".validation-message.error",
+          );
+
+          if (checkedCount === 0) {
+            checkboxGroup.classList.add("invalid");
+            checkboxGroup.classList.remove("valid");
+            if (errorMsg) errorMsg.classList.add("show");
+            isValid = false;
+          } else {
+            checkboxGroup.classList.remove("invalid");
+            checkboxGroup.classList.add("valid");
+            if (errorMsg) errorMsg.classList.remove("show");
+          }
+        }
+
+        return isValid;
+      }
+
+      // ===== Order form: build pesanan object + summary =====
+      function getPesanan() {
+        const pesanan = {};
+        checkboxes.forEach((cb) => {
+          if (cb.checked) {
+            const day = cb
+              .closest("tr")
+              .querySelector("td:first-child")
+              .textContent.trim();
+            if (!pesanan[day]) pesanan[day] = { Isuk: 0, Awan: 0, Sore: 0 };
+            pesanan[day][cb.value] = 1;
+          }
+        });
+        return pesanan;
+      }
+
+      function buildOrderSummary() {
+        const pesanan = getPesanan();
+        const days = Object.keys(pesanan);
+        const totalSelected = days.reduce(
+          (sum, day) =>
+            sum + Object.values(pesanan[day]).reduce((a, b) => a + b, 0),
+          0,
+        );
+        const totalPrice = totalSelected * SUMMARY_PRICE_PER_PORSI;
+
+        let summary = `<div><strong>📝 Nama:</strong> ${namaSelect.value}</div>`;
+        summary += `<div><strong>📅 Pesanan:</strong> ${totalSelected} porsi</div>`;
+
+        summary += `<table style="width:100%; margin-top:10px; border-collapse: collapse;">
+                <thead>
+                    <tr style="background: rgba(255,232,193,0.2);">
+                    <th style="padding:5px; text-align:left;">Hari</th>
+                    <th style="padding:5px; text-align:center;">Isuk</th>
+                    <th style="padding:5px; text-align:center;">Awan</th>
+                    <th style="padding:5px; text-align:center;">Sore</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+
+        days.forEach((day) => {
+          const slots = pesanan[day];
+          summary += `<tr>
+                    <td style="padding:5px;">${day}</td>
+                    <td style="text-align:center;">${slots.Isuk ? "✅" : "-"}</td>
+                    <td style="text-align:center;">${slots.Awan ? "✅" : "-"}</td>
+                    <td style="text-align:center;">${slots.Sore ? "✅" : "-"}</td>
+                    </tr>`;
+        });
+
+        summary += `</tbody></table>`;
+        summary += `<div style="margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,232,193,0.2);">
+                <strong>💰 Total:</strong> Rp ${totalPrice.toLocaleString("id-ID")}
+                </div>`;
+
+        return summary;
+      }
+
+      // ===== Order form: modal control =====
+      function showConfirmationModal() {
+        if (validateForm()) {
+          orderSummary.innerHTML = buildOrderSummary();
+          modal.classList.add("show");
+          modal.setAttribute("aria-hidden", "false");
+          cancelBtn.focus();
+        }
+      }
+
+      function closeModal() {
+        modal.classList.remove("show");
+        modal.setAttribute("aria-hidden", "true");
+        submitBtn.focus();
+      }
+
+      form.addEventListener("submit", (e) => {
+        if (bypassSubmitHandler) return true;
+
+        e.preventDefault();
+        pendingSubmit = true;
+        showConfirmationModal();
+      });
+
+      cancelBtn.addEventListener("click", () => {
+        pendingSubmit = false;
+        closeModal();
+      });
+
+      confirmBtn.addEventListener("click", function () {
+        confirmBtn.disabled = true;
+        confirmBtn.innerHTML =
+          '<span class="loading-spinner"></span>Mengirim...';
+
+        const pesanan = getPesanan();
+        const totalPrice =
+          Object.values(pesanan).reduce((sum, day) => {
+            return sum + Object.values(day).reduce((a, b) => a + b, 0);
+          }, 0) * SUMMARY_PRICE_PER_PORSI;
+
+        console.log("Sending data:", {
+          nama: namaSelect.value,
+          pesanan: pesanan,
+          total: totalPrice,
+        });
+
+        fetch(REPORT_URL, {
+          method: "POST",
+          mode: "no-cors", // prevents CORS errors
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            nama: namaSelect.value,
+            pesanan: pesanan,
+            total: totalPrice,
+          }),
+        }).finally(() => {
+          orderSummary.innerHTML = `
+                        <div style="text-align:center;">
+                            <div style="font-size:40px;margin-bottom:10px;">✅</div>
+                            <h3 style="margin-bottom:8px;">Pesanan Berhasil!</h3>
+                            <p>Data Anda telah dikirim ke sistem.</p>
+                        </div>
+                    `;
+          confirmBtn.disabled = false;
+          confirmBtn.innerHTML = "Tutup";
+
+          confirmBtn.onclick = function () {
+            modal.classList.remove("show");
+            modal.setAttribute("aria-hidden", "true");
+
+            form.reset();
+            updateCounter();
+
+            cancelBtn.style.display = "inline-block";
+            confirmBtn.innerHTML = "Konfirmasi";
+          };
+        });
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modal.classList.contains("show")) {
+          closeModal();
+        }
+      });
+
+      // ===== Hero cleanup + starfield =====
+      function ensureHeroIsSection() {
+        const hero = document.querySelector(".hero");
+        if (!hero) return;
+        if (hero.tagName.toUpperCase() === "SECTION") return;
+
+        const section = document.createElement("section");
+        section.className = hero.className;
+
+        for (let i = 0; i < hero.attributes.length; i++) {
+          const attr = hero.attributes[i];
+          if (attr.name === "class") continue;
+          section.setAttribute(attr.name, attr.value);
+        }
+
+        while (hero.firstChild) {
+          section.appendChild(hero.firstChild);
+        }
+
+        hero.parentNode.replaceChild(section, hero);
+      }
+
+      function removeHtmlComments() {
+        const walker = document.createTreeWalker(
+          document,
+          NodeFilter.SHOW_COMMENT,
+          null,
+          false,
+        );
+        const comments = [];
+        let node = walker.nextNode();
+        while (node) {
+          comments.push(node);
+          node = walker.nextNode();
+        }
+        comments.forEach((c) => c.parentNode && c.parentNode.removeChild(c));
+      }
+
+      function createRandomStars(count = 140) {
+        const hero = document.querySelector(".hero");
+        if (!hero) return;
+
+        let container = hero.querySelector(".stars");
+        if (!container) {
+          container = document.createElement("div");
+          container.className = "stars";
+          hero.appendChild(container);
+        }
+
+        container.innerHTML = "";
+
+        for (let i = 0; i < count; i++) {
+          const star = document.createElement("span");
+          star.className = "star";
+          star.style.left = `${Math.random() * 100}%`;
+          star.style.top = `${Math.random() * 45 + 5}%`;
+          star.style.width = `${Math.random() * 2 + 0.8}px`;
+          star.style.height = star.style.width;
+          star.style.opacity = `${Math.random() * 0.7 + 0.3}`;
+          star.style.animation = `twinkle ${Math.random() * 3 + 2}s ease-in-out ${Math.random() * 2}s infinite`;
+          container.appendChild(star);
+        }
+      }
+
+      // ===== Floating nav auto-hide near hero/footer =====
+      function setupNavAutoHide() {
+        const nav = document.querySelector(".floating-nav");
+        const hero = document.getElementById("hero");
+        const footer = document.querySelector(".site-footer");
+        if (!nav) return;
+
+        let heroVisible = false;
+        let footerVisible = false;
+
+        function updateNavVisibility() {
+          if (heroVisible || footerVisible) {
+            nav.classList.add("hidden");
+          } else {
+            nav.classList.remove("hidden");
+          }
+        }
+
+        if (hero) {
+          const heroObserver = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                heroVisible = entry.isIntersecting;
+                updateNavVisibility();
+              });
+            },
+            { threshold: 0.3 },
+          );
+          heroObserver.observe(hero);
+        }
+
+        if (footer) {
+          const footerObserver = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                footerVisible = entry.isIntersecting;
+                updateNavVisibility();
+              });
+            },
+            { threshold: 0.15 },
+          );
+          footerObserver.observe(footer);
+        }
+      }
+
+      // ===== Report section: today's orders =====
+      function renderNameList(ulId, entries) {
+        const ul = document.getElementById(ulId);
+        ul.innerHTML = "";
+        entries.forEach((entry) => {
+          const li = document.createElement("li");
+          const icon = entry.onTime ? "" : "(New)";
+          li.textContent = `${entry.nama} ${icon}`;
+          li.title = entry.onTime
+            ? "Disubmit hari Minggu (tepat waktu)"
+            : "Disubmit di luar hari Minggu (dadakan)";
+          ul.appendChild(li);
+        });
+      }
+
+      function loadReport() {
+        fetch(REPORT_URL)
+          .then((res) => res.json())
+          .then((data) => {
+            document.getElementById("isuk-count").textContent =
+              data.Isuk.length;
+            document.getElementById("awan-count").textContent =
+              data.Awan.length;
+            document.getElementById("sore-count").textContent =
+              data.Sore.length;
+
+            renderNameList("isuk-list", data.Isuk);
+            renderNameList("awan-list", data.Awan);
+            renderNameList("sore-list", data.Sore);
+          })
+          .catch((err) => console.error("Gagal ambil laporan:", err));
+      }
+
+      // ===== Report section: live clock (WIB) =====
+      function updateClock() {
+        const now = new Date();
+        const jakartaTime = new Date(
+          now.toLocaleString("en-US", { timeZone: "Asia/Jakarta" }),
+        );
+
+        const dayName = DAY_NAMES[jakartaTime.getDay()];
+        const date = jakartaTime.getDate();
+        const month = MONTHS_SHORT[jakartaTime.getMonth()];
+        const year = jakartaTime.getFullYear();
+
+        const hours = String(jakartaTime.getHours()).padStart(2, "0");
+        const minutes = String(jakartaTime.getMinutes()).padStart(2, "0");
+        const seconds = String(jakartaTime.getSeconds()).padStart(2, "0");
+
+        const formatted = `${dayName}, ${date} ${month} ${year} ${hours}:${minutes}:${seconds}`;
+
+        document.getElementById("clock").textContent = formatted;
+      }
+
+      // ===== Payment summary section =====
+      function loadPaymentSummary() {
+        fetch(REPORT_URL + "?type=payment")
+          .then((res) => res.json())
+          .then((data) => {
+            const tbody = document.getElementById("payment-tbody");
+            tbody.innerHTML = "";
+
+            if (data.length === 0) {
+              tbody.innerHTML =
+                '<tr><td colspan="3" style="text-align:center;">Belum ada pesanan</td></tr>';
+              return;
+            }
+
+            data.forEach((item) => {
+              const tr = document.createElement("tr");
+              tr.innerHTML = `
+        <td style="text-align:left;">${item.nama}</td>
+        <td style="text-align:center;">${item.porsi}</td>
+        <td style="text-align:right;">Rp ${item.total.toLocaleString("id-ID")}</td>
+      `;
+              tbody.appendChild(tr);
+            });
+          })
+          .catch((err) => console.error("Gagal ambil rekap pembayaran:", err));
+      }
+
+      // ===== Init =====
+      document.addEventListener("DOMContentLoaded", () => {
+        ensureHeroIsSection();
+        removeHtmlComments();
+        createRandomStars();
+        updateCounter();
+        updateWeekRange();
+        setupNavAutoHide();
+      });
+
+      loadReport();
+      setInterval(loadReport, 30000);
+
+      updateClock();
+      setInterval(updateClock, 1000);
+
+      loadPaymentSummary();
+      setInterval(loadPaymentSummary, 30000);
+    </script>
   </body>
-  <footer class="site-footer">
-    <p>
-      Layanan Tumbas Nasi by
-      <a
-        href="https://www.instagram.com/rachelliacs"
-        target="_blank"
-        class="footer-credit"
-        >@rachelliacs</a
-      >
-    </p>
-  </footer>
 </html>
