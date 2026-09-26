@@ -1677,6 +1677,10 @@
         );
 
         const day = jakartaTime.getDay(); // 0=Minggu, 1=Senin, ...
+        // FIX: previously `day === 0 ? -6 : 1 - day`, which walked a Sunday
+        // submission back to the Monday that had already passed. Sunday is
+        // meant to plan the UPCOMING week, so it should step forward to
+        // tomorrow's Monday instead.
         const diffToMonday = day === 0 ? 1 : 1 - day;
 
         const monday = new Date(jakartaTime);
@@ -1696,13 +1700,22 @@
           `${d.getDate()} ${MONTHS_SHORT[d.getMonth()]} ${d.getFullYear()}`;
         const formatShort = (d) =>
           `${d.getDate()} ${MONTHS_SHORT[d.getMonth()]}`;
+        const formatISO = (d) =>
+          `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 
-        // Fill in each day's date label in the order table
+        // Fill in each day's date label in the order table, and stash the
+        // actual ISO date on the element so submissions carry a real date
+        // (not just a day name, which repeats every week and caused orders
+        // for next week to collide with today's report when both happened
+        // to be "Minggu").
         DAY_ORDER.forEach((dayName, i) => {
           const d = new Date(monday);
           d.setDate(monday.getDate() + i);
           const el = document.getElementById(`date-${dayName}`);
-          if (el) el.textContent = formatShort(d);
+          if (el) {
+            el.textContent = formatShort(d);
+            el.dataset.iso = formatISO(d);
+          }
         });
 
         document.getElementById("week-range").textContent =
@@ -1771,11 +1784,14 @@
         const pesanan = {};
         checkboxes.forEach((cb) => {
           if (cb.checked) {
-            const day = cb
-              .closest("tr")
+            const row = cb.closest("tr");
+            const day = row
               .querySelector("td:first-child")
-              .textContent.trim();
-            if (!pesanan[day]) pesanan[day] = { Isuk: 0, Awan: 0, Sore: 0 };
+              .childNodes[0].textContent.trim();
+            const dateEl = row.querySelector(".day-date");
+            const tanggal = dateEl ? dateEl.dataset.iso || null : null;
+            if (!pesanan[day])
+              pesanan[day] = { Isuk: 0, Awan: 0, Sore: 0, tanggal };
             pesanan[day][cb.value] = 1;
           }
         });
