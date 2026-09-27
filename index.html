@@ -1999,6 +1999,15 @@
         });
       }
 
+      async function loadStaffSchedule() {
+        const response = await fetch(API_URL + "?type=staff");
+        const staff = await response.json();
+
+        document.getElementById("isuk-staff").textContent = staff.isuk || "-";
+        document.getElementById("awan-staff").textContent = staff.awan || "-";
+        document.getElementById("bengi-staff").textContent = staff.bengi || "-";
+      }
+
       function loadReport() {
         fetch(REPORT_URL)
           .then((res) => res.json())
@@ -2095,6 +2104,7 @@
         removeHtmlComments();
         createRandomStars();
         loadSettings();
+        loadStaffSchedule();
         updateCounter();
         updateWeekRange();
         setupNavAutoHide();
