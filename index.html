@@ -1436,7 +1436,7 @@
               <div class="price-label">Total</div>
               <div class="price-amount" id="priceAmount">Rp 0</div>
               <div class="price-breakdown" id="priceBreakdown">
-                (0 item × Rp 2.332)
+                (0 item × Rp 1.300)
               </div>
             </div>
 
@@ -1599,8 +1599,8 @@
       // ===== Config =====
       const REPORT_URL =
         "https://script.google.com/macros/s/AKfycbzfdx9jFM6ygl22pL8iLPjBeOafUvCT3ug48yNTOhvEUbk858X3RPhwukjXkcWpJYES/exec";
-      const PRICE_PER_PORSI = 3100;
-      const SUMMARY_PRICE_PER_PORSI = 2332; // price shown in order summary/price display
+      const PRICE_PER_PORSI = 1300;
+      const SUMMARY_PRICE_PER_PORSI = 1300; // price shown in order summary/price display
       const DAY_ORDER = [
         "Senin",
         "Selasa",
@@ -1660,7 +1660,7 @@
 
         const totalPrice = count * PRICE_PER_PORSI;
         priceAmount.textContent = `Rp ${totalPrice.toLocaleString("id-ID")}`;
-        priceBreakdown.textContent = `(${count} porsi × Rp 3.100)`;
+        priceBreakdown.textContent = `(${count} porsi × Rp 1.300)`;
 
         return count;
       }
