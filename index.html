@@ -1570,6 +1570,7 @@
     <script>
       const REPORT_URL =
         "https://script.google.com/macros/s/AKfycbzfdx9jFM6ygl22pL8iLPjBeOafUvCT3ug48yNTOhvEUbk858X3RPhwukjXkcWpJYES/exec";
+      const API_URL = REPORT_URL;
       let PRICE_PER_PORSI = 1300;
       const DAY_ORDER = [
         "Senin",
@@ -2005,7 +2006,7 @@
 
         document.getElementById("isuk-staff").textContent = staff.isuk || "-";
         document.getElementById("awan-staff").textContent = staff.awan || "-";
-        document.getElementById("bengi-staff").textContent = staff.bengi || "-";
+        document.getElementById("sore-staff").textContent = staff.sore || "-";
       }
 
       function loadReport() {
