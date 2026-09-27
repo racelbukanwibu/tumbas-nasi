@@ -1125,9 +1125,9 @@
             <div class="card-icon">💰</div>
             <h3>Harga Terbaru</h3>
             <p>
-              <strong>Rp 1.300</strong> / porsi<br />
-              Beras Malini,
-              <strong>Rp 77.500</strong> / 5kg.<br />
+              <strong id="info-harga-porsi">Rp 1.300</strong> / porsi<br />
+              Beras <span id="info-merk-beras">Malini</span>,
+              <strong id="info-harga-beras">Rp 77.500</strong> / 5kg.<br />
             </p>
           </div>
         </div>
@@ -1172,8 +1172,8 @@
                 required
               >
                 <option value="">Pilih Nama</option>
-                <option value="Annisa">Annisa</option>
-                <option value="Amanda">Amanda</option>
+                <option value="Nisa">Annisa</option>
+                <option value="Amanda">Manda</option>
                 <option value="Devi">Devi</option>
                 <option value="Ella">Ella</option>
                 <option value="Fani">Fani</option>
@@ -1190,7 +1190,6 @@
                 <option value="Rara">Rara</option>
                 <option value="Tirta">Tirta</option>
                 <option value="Qonita">Qonita</option>
-                <option value="Developer">X</option>
               </select>
             </div>
             <div class="form-group">
@@ -1571,8 +1570,7 @@
     <script>
       const REPORT_URL =
         "https://script.google.com/macros/s/AKfycbzfdx9jFM6ygl22pL8iLPjBeOafUvCT3ug48yNTOhvEUbk858X3RPhwukjXkcWpJYES/exec";
-      const PRICE_PER_PORSI = 1300;
-      const SUMMARY_PRICE_PER_PORSI = 1300;
+      let PRICE_PER_PORSI = 1300;
       const DAY_ORDER = [
         "Senin",
         "Selasa",
@@ -1760,7 +1758,7 @@
             sum + pesanan[day].Isuk + pesanan[day].Awan + pesanan[day].Sore,
           0,
         );
-        const totalPrice = totalSelected * SUMMARY_PRICE_PER_PORSI;
+        const totalPrice = totalSelected * PRICE_PER_PORSI;
 
         let summary = `<div><strong>📝 Nama:</strong> ${namaSelect.value}</div>`;
         summary += `<div><strong>📅 Pesanan:</strong> ${totalSelected} porsi</div>`;
@@ -1831,7 +1829,7 @@
         const totalPrice =
           Object.values(pesanan).reduce((sum, day) => {
             return sum + day.Isuk + day.Awan + day.Sore;
-          }, 0) * SUMMARY_PRICE_PER_PORSI;
+          }, 0) * PRICE_PER_PORSI;
 
         console.log("Sending data:", {
           nama: namaSelect.value,
@@ -2039,6 +2037,33 @@
         document.getElementById("clock").textContent = formatted;
       }
 
+      function loadSettings() {
+        return fetch(REPORT_URL + "?type=settings")
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.hargaPorsi) {
+              PRICE_PER_PORSI = data.hargaPorsi;
+              updateCounter();
+            }
+
+            const hargaPorsiEl = document.getElementById("info-harga-porsi");
+            if (hargaPorsiEl && data.hargaPorsi) {
+              hargaPorsiEl.textContent = `Rp ${Number(data.hargaPorsi).toLocaleString("id-ID")}`;
+            }
+
+            const hargaBerasEl = document.getElementById("info-harga-beras");
+            if (hargaBerasEl && data.hargaBeras) {
+              hargaBerasEl.textContent = `Rp ${Number(data.hargaBeras).toLocaleString("id-ID")}`;
+            }
+
+            const merkBerasEl = document.getElementById("info-merk-beras");
+            if (merkBerasEl && data.merkBeras) {
+              merkBerasEl.textContent = data.merkBeras;
+            }
+          })
+          .catch((err) => console.error("Gagal ambil pengaturan:", err));
+      }
+
       function loadPaymentSummary() {
         fetch(REPORT_URL + "?type=payment")
           .then((res) => res.json())
@@ -2069,6 +2094,7 @@
         ensureHeroIsSection();
         removeHtmlComments();
         createRandomStars();
+        loadSettings();
         updateCounter();
         updateWeekRange();
         setupNavAutoHide();
@@ -2082,6 +2108,8 @@
 
       loadPaymentSummary();
       setInterval(loadPaymentSummary, 30000);
+
+      setInterval(loadSettings, 30000);
     </script>
   </body>
 </html>
