@@ -11,7 +11,6 @@
       rel="stylesheet"
     />
     <style>
-      /* ============ Animations ============ */
       @keyframes twinkle {
         0%,
         to {
@@ -90,7 +89,6 @@
         }
       }
 
-      /* ============ Reset & base ============ */
       *,
       body {
         margin: 0;
@@ -148,7 +146,6 @@
         image-rendering: pixelated;
       }
 
-      /* ============ Floating nav ============ */
       .floating-nav {
         position: fixed;
         z-index: 500;
@@ -220,7 +217,6 @@
         }
       }
 
-      /* ============ Hero ============ */
       .hero {
         position: relative;
         padding: 60px 48px;
@@ -396,7 +392,6 @@
         outline-offset: 2px;
       }
 
-      /* ============ Info & report card grid ============ */
       .info,
       .report {
         display: grid;
@@ -473,7 +468,6 @@
         margin-bottom: 0px;
       }
 
-      /* ============ CTA block ============ */
       .cta {
         text-align: center;
         padding: 60px 50px;
@@ -522,7 +516,6 @@
         outline-offset: 2px;
       }
 
-      /* ============ Order form ============ */
       .week-info-banner {
         background: rgba(0, 0, 0, 0.6);
         color: orange;
@@ -730,7 +723,6 @@
         background-color: #fff;
       }
 
-      /* ============ Tables ============ */
       table {
         width: 100%;
         border-collapse: separate;
@@ -772,7 +764,6 @@
         margin-top: 2px;
       }
 
-      /* ============ Price display ============ */
       .price-label {
         color: #2d4a04;
         font-weight: 700;
@@ -798,7 +789,6 @@
         opacity: 0.85;
       }
 
-      /* ============ Confirmation modal ============ */
       .modal {
         display: none;
         position: fixed;
@@ -892,7 +882,6 @@
         box-shadow: 0 10px 25px rgba(255, 232, 193, 0.3);
       }
 
-      /* ============ Toast ============ */
       .toast {
         display: none;
         position: fixed;
@@ -913,7 +902,6 @@
         display: block;
       }
 
-      /* ============ Report name lists ============ */
       .divider {
         height: 2px;
         background: #2d4a04;
@@ -933,7 +921,6 @@
         border-bottom: 1px dashed rgba(45, 74, 4, 0.3);
       }
 
-      /* ============ Footer ============ */
       .site-footer {
         text-align: center;
         padding: 24px 20px;
@@ -958,7 +945,6 @@
         text-decoration: none;
       }
 
-      /* ============ Responsive ============ */
       @media (max-width: 1024px) {
         .tagline {
           font-size: 14px;
@@ -1090,7 +1076,6 @@
     </style>
   </head>
   <body>
-    <!-- start: floating nav -->
     <nav class="floating-nav" aria-label="Navigasi cepat">
       <a href="#hero" class="nav-dot" aria-label="Beranda" title="Beranda"
         >🏠</a
@@ -1108,9 +1093,7 @@
         >💵</a
       >
     </nav>
-    <!-- end: floating nav -->
 
-    <!-- start: hero -->
     <section class="section hero" id="hero">
       <div class="container">
         <h1>Tumbas Nasi</h1>
@@ -1124,9 +1107,7 @@
         <div class="address-pointer">📍 Mulyosasi Mas C 10</div>
       </div>
     </section>
-    <!-- end: hero -->
 
-    <!-- start: info -->
     <section class="section" id="info">
       <div class="container">
         <h2>⭐ Informasi Layanan</h2>
@@ -1152,9 +1133,7 @@
         </div>
       </div>
     </section>
-    <!-- end: info -->
 
-    <!-- start: order form -->
     <section class="section" id="order">
       <div class="container">
         <h2>⭐ Formulir Pemesanan</h2>
@@ -1490,9 +1469,7 @@
         ></div>
       </div>
     </section>
-    <!-- end: order form -->
 
-    <!-- start: report -->
     <section class="section" id="report">
       <div class="container">
         <h2>
@@ -1538,9 +1515,7 @@
         </div>
       </div>
     </section>
-    <!-- end: report -->
 
-    <!-- start: payment summary -->
     <section class="section" id="payment">
       <div class="container">
         <h2>
@@ -1579,9 +1554,7 @@
         </div>
       </div>
     </section>
-    <!-- end: payment summary -->
 
-    <!-- start: footer -->
     <footer class="site-footer">
       <p>
         Layanan Tumbas Nasi by
@@ -1593,14 +1566,12 @@
         >
       </p>
     </footer>
-    <!-- end: footer -->
 
     <script>
-      // ===== Config =====
       const REPORT_URL =
         "https://script.google.com/macros/s/AKfycbzfdx9jFM6ygl22pL8iLPjBeOafUvCT3ug48yNTOhvEUbk858X3RPhwukjXkcWpJYES/exec";
       const PRICE_PER_PORSI = 1300;
-      const SUMMARY_PRICE_PER_PORSI = 1300; // price shown in order summary/price display
+      const SUMMARY_PRICE_PER_PORSI = 1300;
       const DAY_ORDER = [
         "Senin",
         "Selasa",
@@ -1634,7 +1605,6 @@
         "Sabtu",
       ];
 
-      // ===== Element references =====
       const form = document.getElementById("orderForm");
       const namaSelect = document.getElementById("Nama");
       const checkboxes = document.querySelectorAll(".checkbox-item");
@@ -1651,7 +1621,6 @@
       let pendingSubmit = false;
       let bypassSubmitHandler = false;
 
-      // ===== Order form: selection counter + price =====
       function updateCounter() {
         const count = document.querySelectorAll(
           ".checkbox-item:checked",
@@ -1669,18 +1638,13 @@
         cb.addEventListener("change", updateCounter);
       });
 
-      // ===== Week range + per-day dates in the form =====
       function updateWeekRange() {
         const now = new Date();
         const jakartaTime = new Date(
           now.toLocaleString("en-US", { timeZone: "Asia/Jakarta" }),
         );
 
-        const day = jakartaTime.getDay(); // 0=Minggu, 1=Senin, ...
-        // FIX: previously `day === 0 ? -6 : 1 - day`, which walked a Sunday
-        // submission back to the Monday that had already passed. Sunday is
-        // meant to plan the UPCOMING week, so it should step forward to
-        // tomorrow's Monday instead.
+        const day = jakartaTime.getDay();
         const diffToMonday = day === 0 ? 1 : 1 - day;
 
         const monday = new Date(jakartaTime);
@@ -1689,11 +1653,9 @@
         const sunday = new Date(monday);
         sunday.setDate(monday.getDate() + 6);
 
-        // Last Sunday (day before this week's Monday) = ideal submit time for this week
         const idealSunday = new Date(monday);
         idealSunday.setDate(monday.getDate() - 1);
 
-        // End of next week (Sunday) = ideal deadline for the next submission
         const nextIdealSunday = sunday;
 
         const format = (d) =>
@@ -1703,11 +1665,6 @@
         const formatISO = (d) =>
           `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 
-        // Fill in each day's date label in the order table, and stash the
-        // actual ISO date on the element so submissions carry a real date
-        // (not just a day name, which repeats every week and caused orders
-        // for next week to collide with today's report when both happened
-        // to be "Minggu").
         DAY_ORDER.forEach((dayName, i) => {
           const d = new Date(monday);
           d.setDate(monday.getDate() + i);
@@ -1733,11 +1690,9 @@
           format(nextIdealSunday);
       }
 
-      // ===== Order form: validation =====
       function validateForm() {
         let isValid = true;
 
-        // Validate name
         const nameGroup = namaSelect.closest(".form-group");
         const nameError = nameGroup.querySelector(".validation-message.error");
 
@@ -1752,7 +1707,6 @@
           if (nameError) nameError.classList.remove("show");
         }
 
-        // Validate checkboxes
         const checkedCount = document.querySelectorAll(
           ".checkbox-item:checked",
         ).length;
@@ -1779,7 +1733,6 @@
         return isValid;
       }
 
-      // ===== Order form: build pesanan object + summary =====
       function getPesanan() {
         const pesanan = {};
         checkboxes.forEach((cb) => {
@@ -1803,7 +1756,7 @@
         const days = Object.keys(pesanan);
         const totalSelected = days.reduce(
           (sum, day) =>
-            sum + Object.values(pesanan[day]).reduce((a, b) => a + b, 0),
+            sum + pesanan[day].Isuk + pesanan[day].Awan + pesanan[day].Sore,
           0,
         );
         const totalPrice = totalSelected * SUMMARY_PRICE_PER_PORSI;
@@ -1840,7 +1793,6 @@
         return summary;
       }
 
-      // ===== Order form: modal control =====
       function showConfirmationModal() {
         if (validateForm()) {
           orderSummary.innerHTML = buildOrderSummary();
@@ -1877,7 +1829,7 @@
         const pesanan = getPesanan();
         const totalPrice =
           Object.values(pesanan).reduce((sum, day) => {
-            return sum + Object.values(day).reduce((a, b) => a + b, 0);
+            return sum + day.Isuk + day.Awan + day.Sore;
           }, 0) * SUMMARY_PRICE_PER_PORSI;
 
         console.log("Sending data:", {
@@ -1888,7 +1840,7 @@
 
         fetch(REPORT_URL, {
           method: "POST",
-          mode: "no-cors", // prevents CORS errors
+          mode: "no-cors",
           headers: {
             "Content-Type": "application/json",
           },
@@ -1927,7 +1879,6 @@
         }
       });
 
-      // ===== Hero cleanup + starfield =====
       function ensureHeroIsSection() {
         const hero = document.querySelector(".hero");
         if (!hero) return;
@@ -1991,7 +1942,6 @@
         }
       }
 
-      // ===== Floating nav auto-hide near hero/footer =====
       function setupNavAutoHide() {
         const nav = document.querySelector(".floating-nav");
         const hero = document.getElementById("hero");
@@ -2036,7 +1986,6 @@
         }
       }
 
-      // ===== Report section: today's orders =====
       function renderNameList(ulId, entries) {
         const ul = document.getElementById(ulId);
         ul.innerHTML = "";
@@ -2069,7 +2018,6 @@
           .catch((err) => console.error("Gagal ambil laporan:", err));
       }
 
-      // ===== Report section: live clock (WIB) =====
       function updateClock() {
         const now = new Date();
         const jakartaTime = new Date(
@@ -2090,7 +2038,6 @@
         document.getElementById("clock").textContent = formatted;
       }
 
-      // ===== Payment summary section =====
       function loadPaymentSummary() {
         fetch(REPORT_URL + "?type=payment")
           .then((res) => res.json())
@@ -2117,7 +2064,6 @@
           .catch((err) => console.error("Gagal ambil rekap pembayaran:", err));
       }
 
-      // ===== Init =====
       document.addEventListener("DOMContentLoaded", () => {
         ensureHeroIsSection();
         removeHtmlComments();
